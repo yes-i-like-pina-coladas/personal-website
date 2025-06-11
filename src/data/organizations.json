@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Young and Yandex",
+    "logo": "/assets/young_and_yandex_logo.png",
+    "description": "Young and Yandex - Yandex School of Managers, 2021-2023\nSelected into a top Product Management school in Russia in 2021 and helped organizing it in 2022 and 2023",
+    "customSize": "w-[60px] sm:w-[80px]"
+  },
+  {
+    "name": "Samantha Smith Group",
+    "logo": "/assets/samantha_smith_logo.svg",
+    "description": "Samantha Smith Group - English Language Education for Ukrainian Refugees, 2023-2024\nVolunteer-coordinator helping Ukrainian refugees learn English through organizing classes and coordinating volunteers",
+    "customSize": "w-[100px] sm:w-[140px]"
+  },
+  {
+    "name": "Management of the Future",
+    "logo": "/assets/management_of_the_future.png",
+    "description": "Management of the Future - Leadership Development Program, 2021\nSelected as one of top 100 students in Russia interested in management and leadership",
+    "customSize": "w-[80px] sm:w-[120px]"
+  },
+  {
+    "name": "BEST",
+    "logo": "/assets/best_logo.png",
+    "description": "BEST - Board of European Students of Technology, 2019-2021\nMember of the board and Vice president for HR and IT in Moscow Local Group, organizing international student events and managing IT infrastructure",
+    "customSize": "w-[120px] sm:w-[180px]"
+  }
+] 

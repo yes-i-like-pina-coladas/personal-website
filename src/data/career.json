@@ -1,0 +1,30 @@
+[
+  {
+    "company": "Smartbox Group",
+    "description": "Leading European provider of gift experiences",
+    "logo": "/assets/smartbox_logo.webp",
+    "position": "Product Owner",
+    "years": "2024–present"
+  },
+  {
+    "company": "Trinity College Dublin",
+    "description": "Masters in Management",
+    "logo": "/assets/trinity_logo.svg",
+    "position": "Student",
+    "years": "2023–2024"
+  },
+  {
+    "company": "Yandex (Kinopoisk)",
+    "description": "Russia's largest video streaming service",
+    "logo": "/assets/yandex_logo.png",
+    "position": "Product Manager",
+    "years": "2021–2023"
+  },
+  {
+    "company": "BMSTU",
+    "description": "Bauman Moscow State Technical University - Applied Mathematics",
+    "logo": "/assets/bmstu_logo.png",
+    "position": "Student",
+    "years": "2017–2021"
+  }
+] 
