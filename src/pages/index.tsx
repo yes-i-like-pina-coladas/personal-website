@@ -1,26 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import careerData from "@/data/career.json";
 import projectsData from "@/data/projects.json";
 import organizationsData from "@/data/organizations.json";
-import tagsData from "@/data/tags.json";
-import { getPosts } from "@/lib/content";
-import type { Post } from "@/lib/content";
-import { ArrowRight, LinkedinIcon, FileText, BookOpen } from "lucide-react";
-import { useEffect, useState, useRef } from "react";
+import { LinkedinIcon, FileText, ArrowRight, BookOpen } from "lucide-react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import CompanyLogo from '../components/CompanyLogo';
 import OrganizationLogo from '../components/OrganizationLogo';
 import Footer from '../components/Footer';
 
 export default function Home() {
-  const [posts, setPosts] = useState<Post[]>([]);
   const [activeCareerItem, setActiveCareerItem] = useState<string | null>(null);
 
   useEffect(() => {
-    getPosts().then(setPosts);
-
     const options = {
       root: null,
       rootMargin: '-20% 0px -20% 0px', // Triggers when item is 20% from top/bottom of viewport

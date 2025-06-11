@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface CompanyLogoProps {
   src: string;
   alt: string;
