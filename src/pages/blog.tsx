@@ -1,6 +1,3 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import tagsData from "@/data/tags.json";
 import { getPosts } from "@/lib/content";
 import type { Post } from "@/lib/content";
 import { useEffect, useState } from "react";
