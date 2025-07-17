@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import CompanyLogo from '../components/CompanyLogo';
 import OrganizationLogo from '../components/OrganizationLogo';
+import TiltedPhoto from '../components/TiltedPhoto';
 import Footer from '../components/Footer';
 
 export default function Home() {
@@ -93,36 +94,16 @@ export default function Home() {
                   </Button>
                 </div>
               </motion.div>
-              <motion.div 
-                className="relative w-full max-w-[180px] sm:max-w-[220px] lg:max-w-[320px] lg:order-last mx-auto"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8 }}
-              >
-                <div className="relative group">
-                  <div 
-                    className="absolute inset-0 rounded-3xl bg-blue-500/20 opacity-50 group-hover:opacity-70 pointer-events-none"
-                    style={{
-                      filter: 'blur(60px)',
-                      willChange: 'transform, opacity, filter',
-                      transform: 'translate3d(0, 0, 0)',
-                      backfaceVisibility: 'hidden',
-                    }}
-                  />
-                  <img
-                    alt="Vladimir Loginov"
-                    className="relative mx-auto aspect-square rounded-3xl object-cover shadow-2xl shadow-blue-500/10 transition-all duration-300 group-hover:shadow-blue-500/20 w-full z-10"
-                    src="/assets/photo_normal.jpg"
-                    style={{
-                      objectFit: "cover",
-                      willChange: 'transform',
-                      transform: 'translate3d(0, 0, 0)',
-                    }}
-                  />
-                  <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-gray-700 group-hover:ring-gray-600 transition-all duration-300 z-20" />
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-blue-500/10 via-transparent to-blue-500/10 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20" />
-                </div>
-              </motion.div>
+              <TiltedPhoto
+                src="/assets/photo_normal.jpg"
+                alt="Vladimir Loginov"
+                displayOverlayContent={true}
+                overlayContent={
+                  <div className="bg-blue-500/90 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm font-medium shadow-lg">
+                    Product Manager
+                  </div>
+                }
+              />
             </div>
           </div>
         </section>
