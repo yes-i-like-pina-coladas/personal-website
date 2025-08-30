@@ -4,6 +4,21 @@
     "description": "An interactive platform for learning about cognitive biases through engaging exercises, simulations, and real-world examples.",
     "link": "https://www.cognitivebiaslab.com",
     "image": "/assets/cognitive_bias_lab.png",
-    "status": "Live"
+    "status": "Live",
+    "highlights": [
+      "1000+ organic users",
+      "300k+ search impressions"
+    ]
+  },
+  {
+    "title": "Improve at Chess with AI",
+    "description": "Custom GPT that provides personalised chess advice and analysis. Integrated with Chess.com and Lichess profiles and Stockfish. 5,000+ users.",
+    "link": "https://chatgpt.com/g/g-bRPkePBR8-improve-at-chess-with-ai?model=gpt-5",
+    "image": "/assets/improve_at_chess_with_ai.png",
+    "status": "Live",
+    "highlights": [
+      "5000+ chats",
+      "Top 3 in Chess"
+    ]
   }
-] 
+]

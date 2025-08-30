@@ -3,12 +3,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import careerData from "@/data/career.json";
 import projectsData from "@/data/projects.json";
 import organizationsData from "@/data/organizations.json";
-import { LinkedinIcon, FileText, ArrowRight, BookOpen } from "lucide-react";
+import { LinkedinIcon, FileText, ArrowRight, BookOpen, HeartHandshake, TrendingUp, Scale } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import CompanyLogo from '../components/CompanyLogo';
 import OrganizationLogo from '../components/OrganizationLogo';
 import TiltedPhoto from '../components/TiltedPhoto';
+import TiltedCard from '../components/TiltedCard';
 import Footer from '../components/Footer';
 
 export default function Home() {
@@ -37,10 +38,12 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  // helper removed (unused)
+
   return (
     <div className="flex flex-col min-h-screen bg-[#0A0F1C]">
       <main className="flex-1">
-        <section id="about" className="w-full py-8 sm:py-12 md:py-24 lg:py-32 xl:py-48 mt-16 sm:mt-20">
+        <section id="about" className="w-full py-8 sm:py-12 md:py-24 lg:py-32 xl:py-48 mt-16 sm:mt-20 scroll-mt-28">
           <div className="container px-8 sm:px-12 md:px-16 lg:px-24 max-w-[1400px] mx-auto">
             <div className="flex flex-col-reverse lg:grid gap-8 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_500px] items-center">
               <motion.div 
@@ -107,7 +110,102 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section id="career" className="w-full py-8 sm:py-12 md:py-24 lg:py-32">
+        {/* Values Section */}
+        <section id="values" className="w-full py-8 sm:py-12 md:py-20 lg:py-28 scroll-mt-28">
+          <div className="container px-8 sm:px-12 md:px-16 lg:px-24 max-w-[1400px] mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter mb-4 sm:mb-6 text-white">
+              Values
+            </h2>
+            <p className="text-base sm:text-lg text-gray-300 max-w-3xl mb-8 sm:mb-12">
+              My core values are aligned with Andrey Sakharov’s triad: Peace, Progress, and Human Rights. These principles guide my decisions, collaborations, and the products I build. I try to follow them to contribute to a better world and society, both at work and outside it.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+              <TiltedCard glowClassName="bg-blue-500/20" roundedClassName="rounded-[16px] sm:rounded-[20px]" containerClassName="w-full" className="overflow-hidden">
+                <Card className="relative h-full overflow-hidden border border-gray-800 bg-gray-900/50">
+                  <div className="relative aspect-video overflow-hidden">
+                    <div className="absolute inset-0 bg-blue-500/10" />
+                    <div className="relative w-full h-full grid place-items-center">
+                      <HeartHandshake className="w-12 h-12 sm:w-16 sm:h-16 text-blue-400" />
+                    </div>
+                  </div>
+                  <CardHeader>
+                    <CardTitle className="text-base sm:text-xl lg:text-2xl text-white">Peace</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-300 text-sm sm:text-base">
+                      Foster respectful dialogue and collaboration. Seek solutions that reduce conflict and create trust among teams, users, and stakeholders.
+                    </p>
+                  </CardContent>
+                </Card>
+              </TiltedCard>
+
+              <TiltedCard glowClassName="bg-emerald-500/20" roundedClassName="rounded-[16px] sm:rounded-[20px]" containerClassName="w-full" className="overflow-hidden">
+                <Card className="relative h-full overflow-hidden border border-gray-800 bg-gray-900/50">
+                  <div className="relative aspect-video overflow-hidden">
+                    <div className="absolute inset-0 bg-emerald-500/10" />
+                    <div className="relative w-full h-full grid place-items-center">
+                      <TrendingUp className="w-12 h-12 sm:w-16 sm:h-16 text-emerald-400" />
+                    </div>
+                  </div>
+                  <CardHeader>
+                    <CardTitle className="text-base sm:text-xl lg:text-2xl text-white">Progress</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-300 text-sm sm:text-base">
+                      Pursue meaningful innovation with rigor. Use data, experimentation, and learning loops to deliver real, compounding improvements.
+                    </p>
+                  </CardContent>
+                </Card>
+              </TiltedCard>
+
+              <TiltedCard glowClassName="bg-purple-500/20" roundedClassName="rounded-[16px] sm:rounded-[20px]" containerClassName="w-full" className="overflow-hidden">
+                <Card className="relative h-full overflow-hidden border border-gray-800 bg-gray-900/50">
+                  <div className="relative aspect-video overflow-hidden">
+                    <div className="absolute inset-0 bg-purple-500/10" />
+                    <div className="relative w-full h-full grid place-items-center">
+                      <Scale className="w-12 h-12 sm:w-16 sm:h-16 text-purple-400" />
+                    </div>
+                  </div>
+                  <CardHeader>
+                    <CardTitle className="text-base sm:text-xl lg:text-2xl text-white">Human Rights</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-300 text-sm sm:text-base">
+                      Build responsibly. Protect privacy, ensure accessibility, and champion dignity and inclusion in product choices and team culture.
+                    </p>
+                  </CardContent>
+                </Card>
+              </TiltedCard>
+            </div>
+            {/* Volunteering & Activities moved under Values */}
+            <div className="mt-12 sm:mt-16 lg:mt-24">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tighter mb-6 sm:mb-8 lg:mb-12 text-white text-left">
+                Volunteering & Activities
+              </h3>
+              <motion.div 
+                className="flex flex-col sm:flex-row sm:flex-nowrap justify-center items-center gap-6 sm:gap-8 w-full overflow-visible sm:overflow-x-auto"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                {organizationsData.map((org) => (
+                  <div key={org.name} className="flex items-center justify-center w-full sm:w-auto shrink-0 px-2">
+                    <OrganizationLogo
+                      src={org.logo}
+                      alt={org.name}
+                      description={org.description}
+                      className="h-auto object-contain mx-auto"
+                      customSize={org.customSize}
+                      link={org.link}
+                    />
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+        </section>
+        <section id="career" className="w-full py-8 sm:py-12 md:py-24 lg:py-32 scroll-mt-28">
           <div className="container px-8 sm:px-12 md:px-16 lg:px-24 max-w-[1400px] mx-auto">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter mb-8 sm:mb-16 text-white">
               Career Timeline
@@ -119,7 +217,7 @@ export default function Home() {
                   key={item.company}
                   id={`career-${index}`}
                   data-career-item
-                  className={`mb-8 sm:mb-16 lg:mb-24 last:mb-0 sm:w-[calc(50%-32px)] ${index % 2 === 1 ? 'sm:ml-auto' : ''}`}
+                  className={`mb-8 sm:mb-16 lg:mb-24 last:mb-0 sm:w-[calc(50%-32px)] scroll-mt-28 ${index % 2 === 1 ? 'sm:ml-auto' : ''}`}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -179,34 +277,10 @@ export default function Home() {
                 </motion.div>
               ))}
             </div>
-            {/* Organizations Section */}
-            <div className="mt-12 sm:mt-16 lg:mt-24">
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tighter mb-6 sm:mb-8 lg:mb-12 text-white text-center">
-                Volunteering & Activities
-              </h3>
-              <motion.div 
-                className="grid grid-cols-2 sm:grid-cols-4 place-items-center gap-6 sm:gap-8 w-full"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
-                {organizationsData.map((org) => (
-                  <div key={org.name} className="flex items-center justify-center w-full">
-                    <OrganizationLogo
-                      src={org.logo}
-                      alt={org.name}
-                      description={org.description}
-                      className="w-full max-w-[80px] sm:max-w-full h-auto object-contain mx-auto"
-                      customSize={org.customSize}
-                    />
-                  </div>
-                ))}
-              </motion.div>
-            </div>
+            
           </div>
         </section>
-        <section id="projects" className="w-full py-8 sm:py-12 md:py-24 lg:py-32">
+        <section id="projects" className="w-full py-8 sm:py-12 md:py-24 lg:py-32 scroll-mt-28">
           <div className="container px-8 sm:px-12 md:px-16 lg:px-24 max-w-[1400px] mx-auto">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-white mb-6 sm:mb-8 lg:mb-12">
               Side Projects
@@ -246,6 +320,13 @@ export default function Home() {
                       <p className="text-xs sm:text-base text-gray-300">
                         {project.description}
                       </p>
+                      {Array.isArray((project as any).highlights) && (
+                        <ul className="list-disc list-inside space-y-1 text-[11px] sm:text-sm text-gray-400">
+                          {(project as any).highlights.map((point: string) => (
+                            <li key={point}>{point}</li>
+                          ))}
+                        </ul>
+                      )}
                       <Button 
                         className="w-full sm:w-auto bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 border border-blue-500/30" 
                         variant="outline"
@@ -266,7 +347,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section id="blog" className="w-full py-8 sm:py-12 md:py-24 lg:py-32">
+        <section id="blog" className="w-full py-8 sm:py-12 md:py-24 lg:py-32 scroll-mt-28">
           <div className="container px-8 sm:px-12 md:px-16 lg:px-24 max-w-[1400px] mx-auto">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-white mb-6 sm:mb-8 lg:mb-12">
               Blog

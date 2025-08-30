@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { User, Briefcase, Code, BookOpen } from 'lucide-react';
+import { User, Briefcase, Code, BookOpen, HeartHandshake } from 'lucide-react';
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState('about');
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['about', 'career', 'projects', 'blog'];
+      const sections = ['about', 'values', 'career', 'projects', 'blog'];
       let currentSection = sections[0];
       let minDistance = Infinity;
 
@@ -74,6 +74,17 @@ export default function Navbar() {
         >
           <User className="w-5 h-5" />
           <span className="hidden sm:inline text-sm sm:text-base font-medium">About</span>
+        </button>
+        <button
+          onClick={() => scrollToSection('values')}
+          className={`px-3 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-300 flex items-center gap-2 sm:gap-3 flex-shrink-0 ${
+            activeSection === 'values'
+              ? 'bg-blue-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]'
+              : 'text-gray-400 hover:text-white hover:bg-gray-800'
+          }`}
+        >
+          <HeartHandshake className="w-5 h-5" />
+          <span className="hidden sm:inline text-sm sm:text-base font-medium">Values</span>
         </button>
         <button
           onClick={() => scrollToSection('career')}
