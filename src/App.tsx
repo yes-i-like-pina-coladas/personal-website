@@ -1,6 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/index';
+import Blog from './pages/blog';
+import PostPage from './pages/blog/[slug]';
 import Navbar from './components/Navbar';
+import BlogNavbar from './components/BlogNavbar';
 import { useEffect } from 'react';
 
 function GTagRouteListener() {
@@ -29,9 +32,36 @@ function App() {
     <Router>
       <div className="min-h-screen bg-[#0A0F1C]">
         <GTagRouteListener />
-        <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={
+              <>
+                <Navbar />
+                <Home />
+              </>
+            }
+          />
+          <Route
+            path="/blog"
+            element={
+              <>
+                <BlogNavbar />
+                <div className="mt-4" />
+                <Blog />
+              </>
+            }
+          />
+          <Route
+            path="/blog/:slug"
+            element={
+              <>
+                <BlogNavbar />
+                <div className="mt-4" />
+                <PostPage />
+              </>
+            }
+          />
         </Routes>
       </div>
     </Router>

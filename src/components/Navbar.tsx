@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
 import { User, Briefcase, Code, BookOpen, HeartHandshake } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
-  const [activeSection, setActiveSection] = useState('about');
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isBlog = location.pathname.startsWith('/blog');
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
+    if (isBlog) return; // don't track sections on blog pages
     const handleScroll = () => {
       const sections = ['about', 'values', 'career', 'projects', 'blog'];
       let currentSection = sections[0];
@@ -32,7 +37,7 @@ export default function Navbar() {
     // Add scroll listener
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isBlog]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -51,6 +56,14 @@ export default function Navbar() {
     }
   };
 
+  const handleNavClick = (sectionId: string) => {
+    if (isBlog) {
+      navigate('/', { state: { scrollTo: sectionId } });
+      return;
+    }
+    scrollToSection(sectionId);
+  };
+
   return (
     <div className="fixed top-4 sm:top-8 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] sm:w-auto">
       {/* Glow effect */}
@@ -65,9 +78,9 @@ export default function Navbar() {
       
       <nav className="relative flex items-center justify-between sm:justify-start gap-1 sm:gap-3 p-2 sm:p-3 rounded-full border border-gray-800 bg-gray-900/90 backdrop-blur-lg shadow-lg overflow-x-auto">
         <button
-          onClick={() => scrollToSection('about')}
+          onClick={() => handleNavClick('about')}
           className={`px-3 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-300 flex items-center gap-2 sm:gap-3 flex-shrink-0 ${
-            activeSection === 'about'
+            !isBlog && activeSection === 'about'
               ? 'bg-blue-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]'
               : 'text-gray-400 hover:text-white hover:bg-gray-800'
           }`}
@@ -76,9 +89,9 @@ export default function Navbar() {
           <span className="hidden sm:inline text-sm sm:text-base font-medium">About</span>
         </button>
         <button
-          onClick={() => scrollToSection('values')}
+          onClick={() => handleNavClick('values')}
           className={`px-3 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-300 flex items-center gap-2 sm:gap-3 flex-shrink-0 ${
-            activeSection === 'values'
+            !isBlog && activeSection === 'values'
               ? 'bg-blue-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]'
               : 'text-gray-400 hover:text-white hover:bg-gray-800'
           }`}
@@ -87,9 +100,9 @@ export default function Navbar() {
           <span className="hidden sm:inline text-sm sm:text-base font-medium">Values</span>
         </button>
         <button
-          onClick={() => scrollToSection('career')}
+          onClick={() => handleNavClick('career')}
           className={`px-3 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-300 flex items-center gap-2 sm:gap-3 flex-shrink-0 ${
-            activeSection === 'career'
+            !isBlog && activeSection === 'career'
               ? 'bg-blue-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]'
               : 'text-gray-400 hover:text-white hover:bg-gray-800'
           }`}
@@ -98,9 +111,9 @@ export default function Navbar() {
           <span className="hidden sm:inline text-sm sm:text-base font-medium">Career</span>
         </button>
         <button
-          onClick={() => scrollToSection('projects')}
+          onClick={() => handleNavClick('projects')}
           className={`px-3 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-300 flex items-center gap-2 sm:gap-3 flex-shrink-0 ${
-            activeSection === 'projects'
+            !isBlog && activeSection === 'projects'
               ? 'bg-blue-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]'
               : 'text-gray-400 hover:text-white hover:bg-gray-800'
           }`}
@@ -109,9 +122,9 @@ export default function Navbar() {
           <span className="hidden sm:inline text-sm sm:text-base font-medium">Projects</span>
         </button>
         <button
-          onClick={() => scrollToSection('blog')}
+          onClick={() => handleNavClick('blog')}
           className={`px-3 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-300 flex items-center gap-2 sm:gap-3 flex-shrink-0 ${
-            activeSection === 'blog'
+            !isBlog && activeSection === 'blog'
               ? 'bg-blue-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]'
               : 'text-gray-400 hover:text-white hover:bg-gray-800'
           }`}

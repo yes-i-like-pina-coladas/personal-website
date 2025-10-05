@@ -5,6 +5,11 @@ import projectsData from "@/data/projects.json";
 import organizationsData from "@/data/organizations.json";
 import { LinkedinIcon, FileText, ArrowRight, BookOpen, HeartHandshake, TrendingUp, Scale } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { getPosts } from '@/lib/content';
+import BlogPostCard from '@/components/BlogPostCard';
+import type { Post } from '@/lib/content';
 import { motion } from "framer-motion";
 import CompanyLogo from '../components/CompanyLogo';
 import OrganizationLogo from '../components/OrganizationLogo';
@@ -14,6 +19,8 @@ import Footer from '../components/Footer';
 
 export default function Home() {
   const [activeCareerItem, setActiveCareerItem] = useState<string | null>(null);
+  const [recentPosts, setRecentPosts] = useState<Post[]>([]);
+  const location = useLocation();
 
   useEffect(() => {
     const options = {
@@ -38,7 +45,99 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      const posts = await getPosts();
+      setRecentPosts(posts.slice(0, 3));
+    })();
+  }, []);
+
+  useEffect(() => {
+    const state = location.state as any;
+    if (state?.scrollTo) {
+      const id = state.scrollTo as string;
+      const el = document.getElementById(id);
+      if (el) {
+        const offset = 100;
+        const pos = el.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: pos, behavior: 'smooth' });
+      }
+      // clear state so browser back/forward won’t repeat
+      history.replaceState({}, document.title);
+    }
+  }, [location]);
+
   // helper removed (unused)
+
+  // SEO: home page defaults
+  useEffect(() => {
+    document.title = 'Vladimir Loginov - Product Manager';
+    const description = 'Product Manager accelerating growth through data, experimentation, and insight. Articles on product, AI, and engineering.';
+    let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.setAttribute('name', 'description');
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute('content', description);
+
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', `${window.location.origin}/`);
+
+    const og: Array<[string, string]> = [
+      ['og:site_name', 'Vladimir Loginov'],
+      ['og:type', 'website'],
+      ['og:title', 'Vladimir Loginov - Product Manager'],
+      ['og:description', description],
+      ['og:url', `${window.location.origin}/`],
+      ['og:image', `${window.location.origin}/assets/photo_normal.jpg`],
+    ];
+    og.forEach(([property, content]) => {
+      let tag = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement | null;
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('property', property);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute('content', content);
+    });
+
+    const tw: Array<[string, string]> = [
+      ['twitter:card', 'summary_large_image'],
+      ['twitter:title', 'Vladimir Loginov - Product Manager'],
+      ['twitter:description', description],
+      ['twitter:image', `${window.location.origin}/assets/photo_normal.jpg`],
+    ];
+    tw.forEach(([name, content]) => {
+      let tag = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null;
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('name', name);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute('content', content);
+    });
+
+    const ld = {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Vladimir Loginov',
+      url: `${window.location.origin}/`,
+    };
+    let script = document.getElementById('website-jsonld') as HTMLScriptElement | null;
+    if (!script) {
+      script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.id = 'website-jsonld';
+      document.head.appendChild(script);
+    }
+    script.text = JSON.stringify(ld);
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen bg-[#0A0F1C]">
@@ -352,24 +451,45 @@ export default function Home() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-white mb-6 sm:mb-8 lg:mb-12">
               Blog
             </h2>
-            <div className="flex flex-col items-center justify-center py-12 sm:py-16 text-center">
-              <div className="relative w-16 h-16 sm:w-20 sm:h-20 mb-6 sm:mb-8">
-                <div 
-                  className="absolute inset-0 bg-blue-500/20 rounded-full blur-2xl"
-                  style={{
-                    willChange: 'transform',
-                    transform: 'translate3d(0, 0, 0)',
-                  }}
-                />
-                <div className="relative w-full h-full">
-                  <BookOpen className="w-full h-full text-blue-500/80" />
+            {recentPosts.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-12 sm:py-16 text-center">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 mb-6 sm:mb-8">
+                  <div 
+                    className="absolute inset-0 bg-blue-500/20 rounded-full blur-2xl"
+                    style={{
+                      willChange: 'transform',
+                      transform: 'translate3d(0, 0, 0)',
+                    }}
+                  />
+                  <div className="relative w-full h-full">
+                    <BookOpen className="w-full h-full text-blue-500/80" />
+                  </div>
                 </div>
+                <h3 className="text-xl sm:text-2xl font-semibold text-white mb-3">Coming Soon</h3>
+                <p className="text-base sm:text-lg text-gray-400 max-w-md">
+                  I'm working on sharing my thoughts and experiences through blog posts. Stay tuned!
+                </p>
               </div>
-              <h3 className="text-xl sm:text-2xl font-semibold text-white mb-3">Coming Soon</h3>
-              <p className="text-base sm:text-lg text-gray-400 max-w-md">
-                I'm working on sharing my thoughts and experiences through blog posts. Stay tuned!
-              </p>
-            </div>
+            ) : (
+              <>
+                <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                  {recentPosts.map((post) => (
+                    <BlogPostCard key={post.slug} post={post} />
+                  ))}
+                </div>
+                <div className="mt-8 flex justify-center">
+                  <Button 
+                    className="bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 border border-blue-500/30"
+                    variant="outline"
+                    asChild
+                  >
+                    <Link to="/blog" className="flex items-center gap-2">
+                      View all posts <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
         </section>
       </main>

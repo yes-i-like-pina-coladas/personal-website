@@ -74,6 +74,35 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prose overrides for better readability */
+.prose {
+  --tw-prose-body: theme(colors.gray.300);
+  --tw-prose-headings: theme(colors.white);
+  --tw-prose-links: theme(colors.blue.400);
+  --tw-prose-bold: theme(colors.gray.100);
+  --tw-prose-quotes: theme(colors.gray.200);
+  --tw-prose-code: theme(colors.gray.200);
+  --tw-prose-th-borders: theme(colors.gray.700);
+  --tw-prose-td-borders: theme(colors.gray.800);
+}
+.prose h2, .prose h3, .prose h4 { margin-top: 1.5em; }
+.prose p { margin-top: 1em; margin-bottom: 1em; }
+.prose img { margin: 1.5rem auto; border-radius: 0.5rem; }
+.prose ul, .prose ol { margin-top: 1em; margin-bottom: 1em; }
+.prose table { margin-top: 1.5rem; margin-bottom: 1.5rem; }
+
+/* Remove heading anchor underline/colors from rehype-autolink */
+.post-content h2 a,
+.post-content h3 a,
+.post-content h4 a {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* 3D rotating cube for Values icons */
 @keyframes spinYSlow {
   from { transform: rotateX(-18deg) rotateY(0deg); }
