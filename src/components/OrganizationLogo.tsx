@@ -76,6 +76,7 @@ const OrganizationLogo = ({ src, alt, description, className = '', customSize, l
         src={src}
         alt={alt}
         className={`${className} grayscale hover:grayscale-0 transition-all duration-300 max-h-full w-auto hidden sm:block cursor-pointer`}
+        loading="lazy"
         initial={{ opacity: 0.7 }}
         whileHover={{ opacity: 1 }}
         onMouseEnter={handleMouseEnter}
@@ -98,12 +99,13 @@ const OrganizationLogo = ({ src, alt, description, className = '', customSize, l
         src={src}
         alt={alt}
         className={`${className} grayscale transition-all duration-300 max-h-full w-auto block sm:hidden`}
+        loading="lazy"
         initial={{ opacity: 0.7 }}
       />
       {/* Tooltip for both mobile and desktop */}
       {showTooltip && tooltipPosition && (
         <motion.div
-          className="fixed -translate-x-1/2 -translate-y-full p-3 sm:p-4 bg-gray-900/95 backdrop-blur-lg rounded-lg border border-gray-800 text-white text-sm w-[min(280px,90vw)] sm:w-[320px] shadow-2xl pointer-events-auto"
+          className="fixed -translate-x-1/2 -translate-y-full p-3 sm:p-4 bg-white/95 backdrop-blur-lg rounded-lg border border-stone-200 text-stone-900 text-sm w-[min(280px,90vw)] sm:w-[320px] shadow-2xl pointer-events-auto"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2 }}
@@ -122,15 +124,15 @@ const OrganizationLogo = ({ src, alt, description, className = '', customSize, l
         >
           <div className="relative">
             <p className="font-semibold mb-1.5 sm:mb-2 text-sm sm:text-base">{titlePart}</p>
-            <p className="text-gray-300 text-xs sm:text-sm">{detailsPart}</p>
-            <div className="absolute -bottom-[8px] left-1/2 -translate-x-1/2 w-3 h-3 bg-gray-900/90 border-b border-r border-gray-800 transform rotate-45 hidden sm:block" />
+            <p className="text-stone-600 text-xs sm:text-sm">{detailsPart}</p>
+            <div className="absolute -bottom-[8px] left-1/2 -translate-x-1/2 w-3 h-3 bg-white/90 border-b border-r border-stone-200 transform rotate-45 hidden sm:block" />
             {link && (
               <div className="mt-3 block sm:hidden text-center">
                 <a 
                   href={link} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="inline-block px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-md transition-colors duration-200"
+                  className="inline-block px-3 py-1.5 bg-orange-500 hover:bg-orange-600 text-white text-xs font-medium rounded-md transition-colors duration-200"
                   onClick={(e) => {
                     e.stopPropagation();
                     setIsTouched(false);

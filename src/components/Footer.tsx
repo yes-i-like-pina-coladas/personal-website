@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="w-full py-6 mt-auto">
       <div className="container mx-auto px-8 sm:px-12 md:px-16 lg:px-24 max-w-[1400px]">
         <div className="flex justify-center items-center">
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-stone-500">
             &copy; {currentYear} Vladimir Loginov. All rights reserved.
           </p>
         </div>

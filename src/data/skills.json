@@ -1,0 +1,36 @@
+{
+  "Product": [
+    "Product Strategy",
+    "Roadmapping",
+    "A/B Testing",
+    "User Research",
+    "PRDs & Specs",
+    "OKRs & KPIs",
+    "Stakeholder Management"
+  ],
+  "Tools": [
+    "Jira",
+    "Confluence",
+    "Figma",
+    "Amplitude",
+    "Mixpanel",
+    "Miro",
+    "Notion"
+  ],
+  "Technical": [
+    "SQL",
+    "Python",
+    "TypeScript",
+    "React",
+    "REST APIs",
+    "Git",
+    "Data Analysis"
+  ],
+  "AI & Data": [
+    "Prompt Engineering",
+    "OpenAI API",
+    "LLM Integration",
+    "OSINT",
+    "Data Journalism"
+  ]
+}

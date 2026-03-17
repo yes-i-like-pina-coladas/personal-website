@@ -55,12 +55,12 @@ export default function TiltedPhoto({
 
   function handleMouseEnter() {
     scale.set(scaleOnHover);
-    glowOpacity.set(0.8);
+    glowOpacity.set(1);
   }
 
   function handleMouseLeave() {
     scale.set(1);
-    glowOpacity.set(0.5);
+    glowOpacity.set(0.4);
     rotateX.set(0);
     rotateY.set(0);
   }
@@ -79,9 +79,9 @@ export default function TiltedPhoto({
       <div className="relative group">
         {/* Glow effect */}
         <motion.div
-          className="absolute inset-0 rounded-3xl bg-blue-500/20 pointer-events-none"
+          className="absolute -inset-8 rounded-3xl bg-orange-500/30 pointer-events-none"
           style={{
-            filter: 'blur(60px)',
+            filter: 'blur(80px)',
             willChange: 'transform, opacity, filter',
             transform: 'translate3d(0, 0, 0)',
             backfaceVisibility: 'hidden',
@@ -102,7 +102,7 @@ export default function TiltedPhoto({
         >
           <img
             alt={alt}
-            className={`relative mx-auto aspect-square rounded-3xl object-cover shadow-2xl shadow-blue-500/10 transition-all duration-300 group-hover:shadow-blue-500/20 w-full z-10 will-change-transform [transform:translateZ(0)] ${className}`}
+            className={`relative mx-auto aspect-square rounded-3xl object-cover shadow-2xl shadow-orange-500/10 transition-all duration-300 group-hover:shadow-orange-500/20 w-full z-10 will-change-transform [transform:translateZ(0)] ${className}`}
             src={src}
             style={{
               objectFit: "cover",
@@ -121,10 +121,17 @@ export default function TiltedPhoto({
           )}
           
           {/* Ring overlay */}
-          <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-gray-700 group-hover:ring-gray-600 transition-all duration-300 z-20" />
+          <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-stone-300 group-hover:ring-stone-400 transition-all duration-300 z-20" />
           
           {/* Gradient overlay */}
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-blue-500/10 via-transparent to-blue-500/10 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20" />
+          <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-orange-500/10 via-transparent to-orange-500/10 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20" />
+
+          {/* Decorative hover shapes */}
+          <div className="absolute -top-5 -right-5 w-20 h-20 sm:w-28 sm:h-28 rounded-full ring-[3px] ring-orange-500 opacity-0 scale-50 group-hover:opacity-90 group-hover:scale-100 transition-all duration-500 delay-75 z-30 pointer-events-none [transform:translateZ(20px)]" />
+          <div className="absolute -bottom-4 -left-4 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-orange-500/50 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 delay-150 z-30 pointer-events-none [transform:translateZ(15px)]" />
+          <div className="absolute top-8 -left-6 sm:-left-8 w-14 h-14 sm:w-16 sm:h-16 rounded-xl ring-[3px] ring-orange-500/80 rotate-45 opacity-0 -translate-x-3 group-hover:opacity-90 group-hover:translate-x-0 transition-all duration-500 delay-100 z-30 pointer-events-none [transform:translateZ(25px)_rotate(45deg)]" />
+          <div className="absolute -bottom-6 right-10 sm:right-16 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-orange-500/45 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-200 z-30 pointer-events-none [transform:translateZ(18px)]" />
+          <div className="absolute -top-3 left-12 sm:left-16 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-orange-500/50 opacity-0 -translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-[250ms] z-30 pointer-events-none [transform:translateZ(22px)]" />
         </motion.div>
       </div>
     </motion.div>

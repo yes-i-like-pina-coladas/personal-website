@@ -21,7 +21,7 @@ export default function TiltedCard({
   children,
   className = "",
   containerClassName = "",
-  glowClassName = "bg-blue-500/20",
+  glowClassName = "bg-orange-500/20",
   scaleOnHover = 1.04,
   rotateAmplitude = 14,
   roundedClassName = "rounded-[16px] sm:rounded-[20px]",
@@ -32,7 +32,7 @@ export default function TiltedCard({
   const rotateX = useSpring(useMotionValue(0), springValues);
   const rotateY = useSpring(useMotionValue(0), springValues);
   const scale = useSpring(1, springValues);
-  const glowOpacity = useSpring(0.5, springValues);
+  const glowOpacity = useSpring(0.3, springValues);
 
   function handleMouse(e: React.MouseEvent) {
     if (!ref.current) return;
@@ -53,12 +53,12 @@ export default function TiltedCard({
 
   function handleMouseEnter() {
     scale.set(scaleOnHover);
-    glowOpacity.set(0.8);
+    glowOpacity.set(1);
   }
 
   function handleMouseLeave() {
     scale.set(1);
-    glowOpacity.set(0.5);
+    glowOpacity.set(0.3);
     rotateX.set(0);
     rotateY.set(0);
   }
@@ -75,9 +75,9 @@ export default function TiltedCard({
     >
       <div className="relative group">
         <motion.div
-          className={`absolute inset-0 ${roundedClassName} ${glowClassName} pointer-events-none`}
+          className={`absolute -inset-6 ${roundedClassName} ${glowClassName} pointer-events-none`}
           style={{
-            filter: 'blur(60px)',
+            filter: 'blur(70px)',
             willChange: 'transform, opacity, filter',
             transform: 'translate3d(0, 0, 0)',
             backfaceVisibility: 'hidden',

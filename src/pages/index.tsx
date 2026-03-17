@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import careerData from "@/data/career.json";
 import projectsData from "@/data/projects.json";
 import organizationsData from "@/data/organizations.json";
+// import skillsData from "@/data/skills.json";
 import { LinkedinIcon, FileText, ArrowRight, BookOpen, HeartHandshake, TrendingUp, Scale } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
@@ -140,7 +141,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#0A0F1C]">
+    <div className="flex flex-col min-h-screen bg-[#FFFBF5]">
       <main className="flex-1">
         <section id="about" className="w-full py-8 sm:py-12 md:py-24 lg:py-32 xl:py-48 mt-16 sm:mt-20 scroll-mt-28">
           <div className="container px-8 sm:px-12 md:px-16 lg:px-24 max-w-[1400px] mx-auto">
@@ -154,24 +155,24 @@ export default function Home() {
                 <div className="space-y-3 sm:space-y-4 w-full">
                   <div className="relative inline-block w-full">
                     <div 
-                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/20 opacity-75 blur-[60px] pointer-events-none"
+                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-orange-500/20 opacity-75 blur-[60px] pointer-events-none"
                       style={{
                         willChange: 'transform',
                         zIndex: 0,
                       }}
                     />
-                    <h1 className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl/none font-bold tracking-tighter text-white z-10">
+                    <h1 className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl/none font-bold tracking-tighter text-stone-900 z-10">
                       Vladimir Loginov
                     </h1>
                   </div>
-                  <p className="relative text-lg sm:text-xl lg:text-2xl text-gray-300 max-w-[600px] mx-auto lg:mx-0 z-10">
+                  <p className="relative text-lg sm:text-xl lg:text-2xl text-stone-600 max-w-[600px] mx-auto lg:mx-0 z-10">
                   Accelerating product growth through data, experimentation, and insight.
                   </p>
                 </div>
                 <div className="relative flex flex-col sm:flex-row gap-4 justify-center lg:justify-start z-10 w-full sm:w-auto">
                   <Button 
                     size="lg" 
-                    className="relative group/btn overflow-hidden bg-blue-500 text-white transition-all duration-300 gap-2 w-full sm:w-auto transform hover:-translate-y-0.5 hover:shadow-[0_0_20px_theme(colors.blue.500)]"
+                    className="relative group/btn overflow-hidden bg-orange-500 text-white transition-all duration-300 gap-2 w-full sm:w-auto transform hover:-translate-y-0.5 hover:shadow-[0_0_20px_theme(colors.orange.500)]"
                     asChild
                   >
                     <a href="https://www.linkedin.com/in/loginov-vladimir/" target="_blank" rel="noopener noreferrer">
@@ -184,7 +185,7 @@ export default function Home() {
                   <Button 
                     size="lg" 
                     variant="outline"
-                    className="group/btn relative overflow-hidden border-2 border-gray-700 bg-transparent text-gray-300 hover:text-white hover:border-blue-400 transition-all duration-300 gap-2 w-full sm:w-auto transform hover:-translate-y-0.5 hover:shadow-[0_0_15px_theme(colors.blue.400)]"
+                    className="group/btn relative overflow-hidden border-2 border-stone-300 bg-transparent text-stone-600 hover:text-stone-900 hover:border-orange-400 transition-all duration-300 gap-2 w-full sm:w-auto transform hover:-translate-y-0.5 hover:shadow-[0_0_15px_theme(colors.orange.400)]"
                     asChild
                   >
                     <a href="/cv.pdf" download>
@@ -201,7 +202,7 @@ export default function Home() {
                 alt="Vladimir Loginov"
                 displayOverlayContent={true}
                 overlayContent={
-                  <div className="bg-blue-500/90 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm font-medium shadow-lg">
+                  <div className="bg-orange-500/90 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm font-medium shadow-lg">
                     Product Manager
                   </div>
                 }
@@ -212,84 +213,75 @@ export default function Home() {
         {/* Values Section */}
         <section id="values" className="w-full py-8 sm:py-12 md:py-20 lg:py-28 scroll-mt-28">
           <div className="container px-8 sm:px-12 md:px-16 lg:px-24 max-w-[1400px] mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter mb-4 sm:mb-6 text-white">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter mb-4 sm:mb-6 text-stone-900">
               Values
             </h2>
-            <p className="text-base sm:text-lg text-gray-300 max-w-3xl mb-8 sm:mb-12">
+            <p className="text-base sm:text-lg text-stone-600 max-w-3xl mb-8 sm:mb-12">
               My core values are aligned with Andrey Sakharov’s triad: Peace, Progress, and Human Rights. These principles guide my decisions, collaborations, and the products I build. I try to follow them to contribute to a better world and society, both at work and outside it.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-              <TiltedCard glowClassName="bg-blue-500/20" roundedClassName="rounded-[16px] sm:rounded-[20px]" containerClassName="w-full" className="overflow-hidden">
-                <Card className="relative h-full overflow-hidden border border-gray-800 bg-gray-900/50">
-                  <div className="relative aspect-video overflow-hidden">
-                    <div className="absolute inset-0 bg-blue-500/10" />
-                    <div className="relative w-full h-full grid place-items-center">
-                      <HeartHandshake className="w-12 h-12 sm:w-16 sm:h-16 text-blue-400" />
-                    </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-7">
+              <TiltedCard glowClassName="bg-orange-500/30" roundedClassName="rounded-2xl" containerClassName="w-full" className="overflow-visible" scaleOnHover={1.03} rotateAmplitude={10}>
+                <div className="relative h-full bg-white border border-stone-200/60 rounded-2xl p-6 sm:p-8 group/card">
+                  <div className="absolute top-0 left-6 right-6 sm:left-8 sm:right-8 h-[3px] rounded-b-full bg-gradient-to-r from-orange-400 to-orange-500" />
+                  <div className="mb-5 inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-orange-50 ring-1 ring-orange-200/60">
+                    <HeartHandshake className="w-5 h-5 sm:w-6 sm:h-6 text-orange-500" />
                   </div>
-                  <CardHeader>
-                    <CardTitle className="text-base sm:text-xl lg:text-2xl text-white">Peace</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-300 text-sm sm:text-base">
-                      Foster respectful dialogue and collaboration. Seek solutions that reduce conflict and create trust among teams, users, and stakeholders.
-                    </p>
-                  </CardContent>
-                </Card>
+                  <h3 className="text-lg sm:text-xl font-semibold text-stone-900 mb-2 sm:mb-3">Peace</h3>
+                  <p className="text-stone-500 text-sm sm:text-[15px] leading-relaxed">
+                    Foster respectful dialogue and collaboration. Seek solutions that reduce conflict and create trust among teams, users, and stakeholders.
+                  </p>
+                  <div className="absolute -top-3 -right-3 w-10 h-10 sm:w-14 sm:h-14 rounded-full ring-[3px] ring-orange-500 opacity-0 scale-50 group-hover/card:opacity-80 group-hover/card:scale-100 transition-all duration-500 delay-75 pointer-events-none" />
+                  <div className="absolute -bottom-2 -left-2 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-orange-500/40 opacity-0 scale-50 group-hover/card:opacity-100 group-hover/card:scale-100 transition-all duration-500 delay-150 pointer-events-none" />
+                  <div className="absolute top-10 -right-4 w-5 h-5 sm:w-6 sm:h-6 rounded-md ring-[2px] ring-orange-500/70 rotate-45 opacity-0 translate-x-2 group-hover/card:opacity-80 group-hover/card:translate-x-0 transition-all duration-500 delay-200 pointer-events-none" />
+                </div>
               </TiltedCard>
 
-              <TiltedCard glowClassName="bg-emerald-500/20" roundedClassName="rounded-[16px] sm:rounded-[20px]" containerClassName="w-full" className="overflow-hidden">
-                <Card className="relative h-full overflow-hidden border border-gray-800 bg-gray-900/50">
-                  <div className="relative aspect-video overflow-hidden">
-                    <div className="absolute inset-0 bg-emerald-500/10" />
-                    <div className="relative w-full h-full grid place-items-center">
-                      <TrendingUp className="w-12 h-12 sm:w-16 sm:h-16 text-emerald-400" />
-                    </div>
+              <TiltedCard glowClassName="bg-orange-500/30" roundedClassName="rounded-2xl" containerClassName="w-full" className="overflow-visible" scaleOnHover={1.03} rotateAmplitude={10}>
+                <div className="relative h-full bg-white border border-stone-200/60 rounded-2xl p-6 sm:p-8 group/card">
+                  <div className="absolute top-0 left-6 right-6 sm:left-8 sm:right-8 h-[3px] rounded-b-full bg-gradient-to-r from-orange-400 to-orange-500" />
+                  <div className="mb-5 inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-orange-50 ring-1 ring-orange-200/60">
+                    <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-orange-500" />
                   </div>
-                  <CardHeader>
-                    <CardTitle className="text-base sm:text-xl lg:text-2xl text-white">Progress</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-300 text-sm sm:text-base">
-                      Pursue meaningful innovation with rigor. Use data, experimentation, and learning loops to deliver real, compounding improvements.
-                    </p>
-                  </CardContent>
-                </Card>
+                  <h3 className="text-lg sm:text-xl font-semibold text-stone-900 mb-2 sm:mb-3">Progress</h3>
+                  <p className="text-stone-500 text-sm sm:text-[15px] leading-relaxed">
+                    Pursue meaningful innovation with rigor. Use data, experimentation, and learning loops to deliver real, compounding improvements.
+                  </p>
+                  <div className="absolute -top-3 -left-3 w-8 h-8 sm:w-12 sm:h-12 rounded-full ring-[3px] ring-orange-500 opacity-0 scale-50 group-hover/card:opacity-80 group-hover/card:scale-100 transition-all duration-500 delay-75 pointer-events-none" />
+                  <div className="absolute -bottom-3 -right-2 w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-orange-500/40 opacity-0 scale-50 group-hover/card:opacity-100 group-hover/card:scale-100 transition-all duration-500 delay-150 pointer-events-none" />
+                  <div className="absolute bottom-12 -left-3 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-orange-500/50 opacity-0 -translate-x-2 group-hover/card:opacity-100 group-hover/card:translate-x-0 transition-all duration-500 delay-200 pointer-events-none" />
+                </div>
               </TiltedCard>
 
-              <TiltedCard glowClassName="bg-purple-500/20" roundedClassName="rounded-[16px] sm:rounded-[20px]" containerClassName="w-full" className="overflow-hidden">
-                <Card className="relative h-full overflow-hidden border border-gray-800 bg-gray-900/50">
-                  <div className="relative aspect-video overflow-hidden">
-                    <div className="absolute inset-0 bg-purple-500/10" />
-                    <div className="relative w-full h-full grid place-items-center">
-                      <Scale className="w-12 h-12 sm:w-16 sm:h-16 text-purple-400" />
-                    </div>
+              <TiltedCard glowClassName="bg-orange-500/30" roundedClassName="rounded-2xl" containerClassName="w-full" className="overflow-visible" scaleOnHover={1.03} rotateAmplitude={10}>
+                <div className="relative h-full bg-white border border-stone-200/60 rounded-2xl p-6 sm:p-8 group/card">
+                  <div className="absolute top-0 left-6 right-6 sm:left-8 sm:right-8 h-[3px] rounded-b-full bg-gradient-to-r from-orange-400 to-orange-500" />
+                  <div className="mb-5 inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-orange-50 ring-1 ring-orange-200/60">
+                    <Scale className="w-5 h-5 sm:w-6 sm:h-6 text-orange-500" />
                   </div>
-                  <CardHeader>
-                    <CardTitle className="text-base sm:text-xl lg:text-2xl text-white">Human Rights</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-300 text-sm sm:text-base">
-                      Build responsibly. Protect privacy, ensure accessibility, and champion dignity and inclusion in product choices and team culture.
-                    </p>
-                  </CardContent>
-                </Card>
+                  <h3 className="text-lg sm:text-xl font-semibold text-stone-900 mb-2 sm:mb-3">Human Rights</h3>
+                  <p className="text-stone-500 text-sm sm:text-[15px] leading-relaxed">
+                    Build responsibly. Protect privacy, ensure accessibility, and champion dignity and inclusion in product choices and team culture.
+                  </p>
+                  <div className="absolute -bottom-3 -right-3 w-11 h-11 sm:w-14 sm:h-14 rounded-full ring-[3px] ring-orange-500 opacity-0 scale-50 group-hover/card:opacity-80 group-hover/card:scale-100 transition-all duration-500 delay-75 pointer-events-none" />
+                  <div className="absolute -top-2 -left-2 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-orange-500/40 opacity-0 scale-50 group-hover/card:opacity-100 group-hover/card:scale-100 transition-all duration-500 delay-150 pointer-events-none" />
+                  <div className="absolute top-1/2 -right-4 w-5 h-5 sm:w-6 sm:h-6 rounded-md ring-[2px] ring-orange-500/70 rotate-45 opacity-0 translate-x-2 group-hover/card:opacity-80 group-hover/card:translate-x-0 transition-all duration-500 delay-200 pointer-events-none" />
+                </div>
               </TiltedCard>
             </div>
             {/* Volunteering & Activities moved under Values */}
             <div className="mt-12 sm:mt-16 lg:mt-24">
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tighter mb-6 sm:mb-8 lg:mb-12 text-white text-left">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tighter mb-6 sm:mb-8 lg:mb-12 text-stone-900 text-left">
                 Volunteering & Activities
               </h3>
               <motion.div 
-                className="flex flex-col sm:flex-row sm:flex-nowrap justify-center items-center gap-6 sm:gap-8 w-full overflow-visible sm:overflow-x-auto"
+                className="flex flex-wrap justify-center items-center gap-8 sm:gap-10 w-full"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
               >
                 {organizationsData.map((org) => (
-                  <div key={org.name} className="flex items-center justify-center w-full sm:w-auto shrink-0 px-2">
+                  <div key={org.name} className="flex items-center justify-center">
                     <OrganizationLogo
                       src={org.logo}
                       alt={org.name}
@@ -306,11 +298,11 @@ export default function Home() {
         </section>
         <section id="career" className="w-full py-8 sm:py-12 md:py-24 lg:py-32 scroll-mt-28">
           <div className="container px-8 sm:px-12 md:px-16 lg:px-24 max-w-[1400px] mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter mb-8 sm:mb-16 text-white">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter mb-8 sm:mb-16 text-stone-900">
               Career Timeline
             </h2>
             <div className="relative mt-4 sm:mt-8">
-              <div className="hidden sm:block absolute left-1/2 h-full w-[2px] -translate-x-1/2 bg-gray-200/40" />
+              <div className="hidden sm:block absolute left-1/2 h-full w-[2px] -translate-x-1/2 bg-stone-300" />
               {careerData.map((item, index) => (
                 <motion.div
                   key={item.company}
@@ -324,19 +316,19 @@ export default function Home() {
                 >
                   <div className="relative">
                     {/* Date label */}
-                    <div className={`hidden sm:block absolute top-6 text-base sm:text-lg font-medium text-gray-400 whitespace-nowrap ${
+                    <div className={`hidden sm:block absolute top-6 text-base sm:text-lg font-medium text-stone-400 whitespace-nowrap ${
                       index % 2 === 0 ? 'right-0 translate-x-[calc(100%+40px)]' : 'left-0 -translate-x-[calc(100%+40px)]'
                     }`}>
                       {item.years}
                     </div>
                     
-                    <div className={`relative group ${activeCareerItem === `career-${index}` ? 'is-active' : ''}`}>
+                    <div className={`relative group overflow-visible ${activeCareerItem === `career-${index}` ? 'is-active' : ''}`}>
                       <div 
-                        className={`absolute -inset-2 sm:-inset-4 bg-blue-500/30 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-[20px] sm:rounded-[28px] pointer-events-none ${
+                        className={`absolute -inset-4 sm:-inset-6 bg-orange-500/30 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-[24px] sm:rounded-[32px] pointer-events-none ${
                           activeCareerItem === `career-${index}` ? 'opacity-100' : ''
                         }`}
                         style={{
-                          filter: 'blur(30px)',
+                          filter: 'blur(50px)',
                           willChange: 'transform, opacity, filter',
                           transform: 'translate3d(0, 0, 0)',
                           backfaceVisibility: 'hidden',
@@ -371,6 +363,10 @@ export default function Home() {
                           </div>
                         </div>
                       </div>
+                      {/* Decorative hover/scroll shapes */}
+                      <div className={`absolute ${index % 2 === 0 ? '-top-3 -right-3' : '-top-3 -left-3'} w-10 h-10 sm:w-14 sm:h-14 rounded-full ring-[3px] ring-orange-500 opacity-0 scale-50 group-hover:opacity-80 group-hover:scale-100 transition-all duration-500 delay-75 pointer-events-none z-20 ${activeCareerItem === `career-${index}` ? 'opacity-80 scale-100' : ''}`} />
+                      <div className={`absolute ${index % 2 === 0 ? '-bottom-2 -left-2' : '-bottom-2 -right-2'} w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-orange-500/40 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 delay-150 pointer-events-none z-20 ${activeCareerItem === `career-${index}` ? 'opacity-100 scale-100' : ''}`} />
+                      <div className={`absolute ${index % 2 === 0 ? 'top-1/2 -left-4' : 'top-1/2 -right-4'} w-4 h-4 sm:w-5 sm:h-5 rounded-md ring-[2px] ring-orange-500/70 rotate-45 opacity-0 ${index % 2 === 0 ? '-translate-x-2 group-hover:translate-x-0' : 'translate-x-2 group-hover:translate-x-0'} group-hover:opacity-80 transition-all duration-500 delay-200 pointer-events-none z-20 ${activeCareerItem === `career-${index}` ? 'opacity-80 translate-x-0' : ''}`} />
                     </div>
                   </div>
                 </motion.div>
@@ -379,56 +375,90 @@ export default function Home() {
             
           </div>
         </section>
+        {/* Skills section hidden for now
+        <section className="w-full py-8 sm:py-12 md:py-20 lg:py-28">
+          <div className="container px-8 sm:px-12 md:px-16 lg:px-24 max-w-[1400px] mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-stone-900 mb-6 sm:mb-8 lg:mb-12">
+              Skills & Tools
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+              {Object.entries(skillsData).map(([category, skills], catIndex) => (
+                <motion.div
+                  key={category}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: catIndex * 0.1 }}
+                >
+                  <h3 className="text-sm font-semibold text-orange-500 uppercase tracking-wider mb-3">{category}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-3 py-1.5 text-sm font-medium rounded-full bg-white border border-stone-200/60 text-stone-600 hover:border-orange-400 hover:text-stone-900 hover:shadow-[0_0_10px_theme(colors.orange.400/0.15)] transition-all duration-200"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+        */}
         <section id="projects" className="w-full py-8 sm:py-12 md:py-24 lg:py-32 scroll-mt-28">
           <div className="container px-8 sm:px-12 md:px-16 lg:px-24 max-w-[1400px] mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-white mb-6 sm:mb-8 lg:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-stone-900 mb-6 sm:mb-8 lg:mb-12">
               Side Projects
             </h2>
             <div className="mt-6 sm:mt-8 grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {projectsData.map((project) => (
+              {projectsData.map((project, index) => (
                 <motion.div
                   key={project.title}
                   whileHover={{ y: -5 }}
                   transition={{ duration: 0.2 }}
-                  className="w-full group relative"
+                  className="w-full group relative overflow-visible"
                 >
                   {/* Glow effect */}
                   <div 
-                    className="absolute -inset-1 sm:-inset-2 bg-blue-500/30 opacity-0 group-hover:opacity-100 rounded-[16px] sm:rounded-[20px] pointer-events-none transition-all duration-500"
+                    className="absolute -inset-4 sm:-inset-6 bg-orange-500/30 opacity-0 group-hover:opacity-100 rounded-[24px] sm:rounded-[32px] pointer-events-none transition-all duration-500"
                     style={{
-                      filter: 'blur(30px)',
+                      filter: 'blur(50px)',
                       willChange: 'transform, opacity, filter',
                       transform: 'translate3d(0, 0, 0)',
                       backfaceVisibility: 'hidden',
                     }}
                   />
-                  <Card className="relative h-full overflow-hidden border border-gray-800 bg-gray-900/50 transition-colors duration-300 group-hover:border-blue-500/50">
+                  <Card className="relative h-full overflow-hidden border border-stone-200 bg-white/80 transition-colors duration-300 group-hover:border-orange-500/50 z-10">
                     <div className="relative aspect-video overflow-hidden">
                       <img
                         src={project.image}
                         alt={project.title}
+                        loading="lazy"
                         className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
                       />
                     </div>
                     <CardHeader>
-                      <CardTitle className="text-base sm:text-xl lg:text-2xl text-white">
+                      <CardTitle className="text-base sm:text-xl lg:text-2xl text-stone-900">
                         {project.title}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-2 sm:space-y-4">
-                      <p className="text-xs sm:text-base text-gray-300">
+                      <p className="text-xs sm:text-base text-stone-600">
                         {project.description}
                       </p>
                       {Array.isArray((project as any).highlights) && (
-                        <ul className="list-disc list-inside space-y-1 text-[11px] sm:text-sm text-gray-400">
+                        <ul className="list-disc list-inside space-y-1 text-[11px] sm:text-sm text-stone-500">
                           {(project as any).highlights.map((point: string) => (
                             <li key={point}>{point}</li>
                           ))}
                         </ul>
                       )}
                       <Button 
-                        className="w-full sm:w-auto bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 border border-blue-500/30" 
+                        className="w-full sm:w-auto border-2 border-stone-300 bg-transparent text-stone-600 hover:text-stone-900 hover:border-orange-400 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_15px_theme(colors.orange.400)]" 
                         variant="outline"
+                        asChild
                       >
                         <a
                           href={project.link}
@@ -441,6 +471,10 @@ export default function Home() {
                       </Button>
                     </CardContent>
                   </Card>
+                  {/* Decorative hover shapes */}
+                  <div className={`absolute ${index % 2 === 0 ? '-top-3 -right-3' : '-top-3 -left-3'} w-10 h-10 sm:w-14 sm:h-14 rounded-full ring-[3px] ring-orange-500 opacity-0 scale-50 group-hover:opacity-80 group-hover:scale-100 transition-all duration-500 delay-75 pointer-events-none z-20`} />
+                  <div className={`absolute ${index % 2 === 0 ? '-bottom-2 -left-2' : '-bottom-2 -right-2'} w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-orange-500/40 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 delay-150 pointer-events-none z-20`} />
+                  <div className={`absolute ${index % 2 === 0 ? 'top-1/3 -left-4' : 'top-1/3 -right-4'} w-4 h-4 sm:w-5 sm:h-5 rounded-md ring-[2px] ring-orange-500/70 rotate-45 opacity-0 ${index % 2 === 0 ? '-translate-x-2 group-hover:translate-x-0' : 'translate-x-2 group-hover:translate-x-0'} group-hover:opacity-80 transition-all duration-500 delay-200 pointer-events-none z-20`} />
                 </motion.div>
               ))}
             </div>
@@ -448,25 +482,25 @@ export default function Home() {
         </section>
         <section id="blog" className="w-full py-8 sm:py-12 md:py-24 lg:py-32 scroll-mt-28">
           <div className="container px-8 sm:px-12 md:px-16 lg:px-24 max-w-[1400px] mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-white mb-6 sm:mb-8 lg:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-stone-900 mb-6 sm:mb-8 lg:mb-12">
               Blog
             </h2>
             {recentPosts.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-12 sm:py-16 text-center">
                 <div className="relative w-16 h-16 sm:w-20 sm:h-20 mb-6 sm:mb-8">
                   <div 
-                    className="absolute inset-0 bg-blue-500/20 rounded-full blur-2xl"
+                    className="absolute inset-0 bg-orange-500/20 rounded-full blur-2xl"
                     style={{
                       willChange: 'transform',
                       transform: 'translate3d(0, 0, 0)',
                     }}
                   />
                   <div className="relative w-full h-full">
-                    <BookOpen className="w-full h-full text-blue-500/80" />
+                    <BookOpen className="w-full h-full text-orange-500/80" />
                   </div>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-semibold text-white mb-3">Coming Soon</h3>
-                <p className="text-base sm:text-lg text-gray-400 max-w-md">
+                <h3 className="text-xl sm:text-2xl font-semibold text-stone-900 mb-3">Coming Soon</h3>
+                <p className="text-base sm:text-lg text-stone-500 max-w-md">
                   I'm working on sharing my thoughts and experiences through blog posts. Stay tuned!
                 </p>
               </div>
@@ -479,7 +513,7 @@ export default function Home() {
                 </div>
                 <div className="mt-8 flex justify-center">
                   <Button 
-                    className="bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 border border-blue-500/30"
+                    className="border-2 border-stone-300 bg-transparent text-stone-600 hover:text-stone-900 hover:border-orange-400 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_15px_theme(colors.orange.400)]"
                     variant="outline"
                     asChild
                   >

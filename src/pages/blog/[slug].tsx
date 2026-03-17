@@ -168,45 +168,45 @@ export default function PostPage() {
   if (!post) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <p className="text-white/80">Loading…</p>
+        <p className="text-stone-600">Loading…</p>
       </div>
     );
   }
 
   const { Component, frontmatter, readingTimeMinutes } = post as any;
   const components: Record<string, any> = {
-    h2: (props: any) => <h2 className="mt-8 mb-3 text-3xl font-bold text-blue-400 scroll-mt-28" {...props} />,
-    h3: (props: any) => <h3 className="mt-6 mb-2 text-2xl font-semibold scroll-mt-28" {...props} />,
-    h4: (props: any) => <h4 className="mt-5 mb-2 text-xl font-semibold scroll-mt-28" {...props} />,
-    p: (props: any) => <p className="my-4 leading-7" {...props} />,
-    a: (props: any) => <a className="text-blue-400 underline underline-offset-2 hover:text-blue-300" {...props} />,
-    ul: (props: any) => <ul className="my-4 list-disc pl-6 space-y-2" {...props} />,
-    ol: (props: any) => <ol className="my-4 list-decimal pl-6 space-y-2" {...props} />,
+    h2: (props: any) => <h2 className="mt-8 mb-3 text-3xl font-bold text-orange-600 scroll-mt-28" {...props} />,
+    h3: (props: any) => <h3 className="mt-6 mb-2 text-2xl font-semibold text-stone-900 scroll-mt-28" {...props} />,
+    h4: (props: any) => <h4 className="mt-5 mb-2 text-xl font-semibold text-stone-900 scroll-mt-28" {...props} />,
+    p: (props: any) => <p className="my-4 leading-7 text-stone-700" {...props} />,
+    a: (props: any) => <a className="text-orange-600 underline underline-offset-2 hover:text-orange-500" {...props} />,
+    ul: (props: any) => <ul className="my-4 list-disc pl-6 space-y-2 text-stone-700" {...props} />,
+    ol: (props: any) => <ol className="my-4 list-decimal pl-6 space-y-2 text-stone-700" {...props} />,
     li: (props: any) => <li className="leading-7" {...props} />,
-    blockquote: (props: any) => <blockquote className="my-6 border-l-4 border-blue-500/40 pl-4 italic text-gray-300" {...props} />,
-    img: (props: any) => <img className="my-6 rounded-lg mx-auto" {...props} />,
-    hr: (props: any) => <hr className="my-8 border-gray-800" {...props} />,
+    blockquote: (props: any) => <blockquote className="my-6 border-l-4 border-orange-500/40 pl-4 italic text-stone-600" {...props} />,
+    img: (props: any) => <img className="my-6 rounded-lg mx-auto" loading="lazy" {...props} />,
+    hr: (props: any) => <hr className="my-8 border-stone-200" {...props} />,
     table: (props: any) => <table className="my-6 w-full text-left border-collapse" {...props} />,
-    th: (props: any) => <th className="border-b border-gray-700 py-2 pr-4 font-semibold" {...props} />,
-    td: (props: any) => <td className="border-b border-gray-800 py-2 pr-4 align-top" {...props} />,
+    th: (props: any) => <th className="border-b border-stone-300 py-2 pr-4 font-semibold text-stone-900" {...props} />,
+    td: (props: any) => <td className="border-b border-stone-200 py-2 pr-4 align-top text-stone-700" {...props} />,
     em: (props: any) => <em className="italic" {...props} />,
-    strong: (props: any) => <strong className="font-semibold" {...props} />,
-    code: (props: any) => <code className="px-1.5 py-0.5 rounded bg-white/10 text-white" {...props} />,
-    pre: (props: any) => <pre className="my-6 overflow-x-auto rounded bg-black/70 p-4" {...props} />,
+    strong: (props: any) => <strong className="font-semibold text-stone-900" {...props} />,
+    code: (props: any) => <code className="px-1.5 py-0.5 rounded bg-stone-100 text-stone-800" {...props} />,
+    pre: (props: any) => <pre className="my-6 overflow-x-auto rounded bg-stone-100 p-4" {...props} />,
   };
 
   return (
     <>
       <div id="top" className="sr-only">top</div>
-      <div className="container mx-auto px-4 py-8 mt-10 sm:mt-12 text-gray-100 grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8">
+      <div className="container mx-auto px-4 py-8 mt-10 sm:mt-12 text-stone-800 grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8">
         <aside className="hidden lg:block sticky top-24 h-max self-start">
-          <div className="text-sm text-white/70 font-semibold mb-3">On this page</div>
+          <div className="text-sm text-stone-500 font-semibold mb-3">On this page</div>
           <nav className="space-y-1 text-sm">
             {toc.map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className={`block rounded px-2 py-1 transition ${activeId === item.id ? 'bg-white/10 text-white' : 'text-white/70 hover:text-white'}`}
+                className={`block rounded px-2 py-1 transition ${activeId === item.id ? 'bg-stone-100 text-stone-900' : 'text-stone-500 hover:text-stone-900'}`}
               >
                 {item.text}
               </a>
@@ -214,14 +214,14 @@ export default function PostPage() {
           </nav>
         </aside>
         <div>
-          <h1 className="text-4xl font-bold mb-2">{frontmatter.title}</h1>
+          <h1 className="text-4xl font-bold mb-2 text-stone-900">{frontmatter.title}</h1>
           {frontmatter.subtitle && (
-            <p className="text-lg text-white/80 mb-1">{frontmatter.subtitle}</p>
+            <p className="text-lg text-stone-600 mb-1">{frontmatter.subtitle}</p>
           )}
           {frontmatter.subtitleNote && (
-            <p className="text-sm text-white/60 italic mb-4">{frontmatter.subtitleNote}</p>
+            <p className="text-sm text-stone-500 italic mb-4">{frontmatter.subtitleNote}</p>
           )}
-          <div className="text-sm text-white/60 mb-8">
+          <div className="text-sm text-stone-500 mb-8">
             {(frontmatter.author as string) || 'Vladimir Loginov'} · {new Date(frontmatter.date || Date.now()).toLocaleDateString('en-GB')} {readingTimeMinutes ? `· ${readingTimeMinutes} min read` : ''} {frontmatter.tags?.length ? `· ${frontmatter.tags.join(', ')}` : ''}
           </div>
           <div ref={contentRef} className="max-w-3xl post-content">
