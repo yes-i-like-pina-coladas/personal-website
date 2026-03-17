@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { loadPostBySlug } from '@/lib/content';
 import Footer from '@/components/Footer';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 function setMetaTag(name: string, content: string) {
   if (!content) return;
@@ -138,6 +138,36 @@ export default function PostPage() {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [toc, setToc] = useState<Array<{ id: string; text: string }>>([]);
   const [activeId, setActiveId] = useState<string>('');
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const [readProgress, setReadProgress] = useState(0);
+
+  const closeLightbox = useCallback(() => setLightboxSrc(null), []);
+
+  useEffect(() => {
+    if (!lightboxSrc) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeLightbox(); };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [lightboxSrc, closeLightbox]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const el = contentRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const total = el.scrollHeight;
+      const visible = window.innerHeight;
+      const scrolled = Math.max(0, -rect.top);
+      setReadProgress(Math.min(1, scrolled / (total - visible)));
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [post]);
 
   useEffect(() => {
     if (!contentRef.current) return;
@@ -184,7 +214,14 @@ export default function PostPage() {
     ol: (props: any) => <ol className="my-4 list-decimal pl-6 space-y-2 text-stone-700" {...props} />,
     li: (props: any) => <li className="leading-7" {...props} />,
     blockquote: (props: any) => <blockquote className="my-6 border-l-4 border-orange-500/40 pl-4 italic text-stone-600" {...props} />,
-    img: (props: any) => <img className="my-6 rounded-lg mx-auto" loading="lazy" {...props} />,
+    img: (props: any) => (
+      <img
+        className="my-6 rounded-lg mx-auto cursor-zoom-in hover:opacity-90 transition-opacity"
+        loading="lazy"
+        onClick={() => props.src && setLightboxSrc(props.src)}
+        {...props}
+      />
+    ),
     hr: (props: any) => <hr className="my-8 border-stone-200" {...props} />,
     table: (props: any) => <table className="my-6 w-full text-left border-collapse" {...props} />,
     th: (props: any) => <th className="border-b border-stone-300 py-2 pr-4 font-semibold text-stone-900" {...props} />,
@@ -197,6 +234,36 @@ export default function PostPage() {
 
   return (
     <>
+      {/* Reading progress bar */}
+      <div className="fixed top-0 left-0 right-0 h-[3px] z-50">
+        <div
+          className="h-full bg-orange-500 transition-[width] duration-150 ease-out"
+          style={{ width: `${readProgress * 100}%` }}
+        />
+      </div>
+
+      {/* Lightbox overlay */}
+      {lightboxSrc && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm cursor-zoom-out lightbox-enter"
+          onClick={closeLightbox}
+        >
+          <img
+            src={lightboxSrc}
+            alt=""
+            className="max-w-[92vw] max-h-[90vh] rounded-lg object-contain shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button
+            onClick={closeLightbox}
+            className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors text-3xl leading-none font-light"
+            aria-label="Close lightbox"
+          >
+            &times;
+          </button>
+        </div>
+      )}
+
       <div id="top" className="sr-only">top</div>
       <div className="container mx-auto px-4 py-8 mt-10 sm:mt-12 text-stone-800 grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8">
         <aside className="hidden lg:block sticky top-24 h-max self-start">
