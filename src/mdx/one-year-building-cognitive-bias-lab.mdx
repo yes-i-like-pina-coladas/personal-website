@@ -1,0 +1,297 @@
+---
+title: "One Year of Building Cognitive Bias Lab: What It Taught Me About Building as a PM in the Age of AI"
+date: "2026-03-17"
+tags: ["AI", "Product Management", "Side Project", "SEO", "Building in Public"]
+description: "The story of building an interactive learning platform from scratch as a non-engineer PM — what worked, what broke, and what I learned about AI-native product development."
+subtitle: "The story of building an interactive learning platform from scratch as a non-engineer PM — what worked, what broke, and what I learned about AI-native product development."
+image: "/assets/blog/one-year-building-cognitive-bias-lab/homepage.png"
+accent: "#8B5CF6"
+---
+
+About a year ago, I started building [Cognitive Bias Lab](https://www.cognitivebiaslab.com/) — an interactive website where people can learn cognitive biases through practice, simulations, quizzes, and playful little experiments.
+
+![Cognitive Bias Lab homepage](/assets/blog/one-year-building-cognitive-bias-lab/homepage.png)
+
+If you're expecting a neat "I had a vision and executed it perfectly" story, this is not that.
+
+This was more like a very classic Product Manager side-quest: curiosity turning into scope creep, AI tools making me feel superhuman for a week, technical problems humbling me right after, and a lot of moments where I had to ask myself why I chose a hobby that occasionally felt like unpaid emotional damage.
+
+But the project is alive, online, and genuinely useful now, which still feels a bit surreal.
+
+And looking back, it became more than a side project. It turned into a weirdly effective lesson in what it means to build at the edge of AI as a PM: where the barriers to making something are much lower, but the barriers to making something *real* are still very much there.
+
+So here's the story of the first year: how it started, how I built it, what broke, how SEO nearly killed my motivation, what the community gave me, and what I'd do differently if I started again.
+
+## How it all started: I wanted to learn biases… but I couldn't make it stick
+
+I've been interested in cognitive biases for a long time. The idea that our brains run on shortcuts fascinates me, because it explains so much of how people actually make decisions.
+
+The problem was that I couldn't learn biases in a way that stuck. I'd read an article or watch a video, feel smart for ten minutes, and then forget most of it. I kept bookmarking things and starting courses, but it was passive consumption, not real learning.
+
+At some point, I realised: I was consuming information, but I wasn't getting outcomes. I didn't want to just recognise terms like anchoring bias in a list, I wanted to notice them in real life, in conversations, decisions, and in product work.
+
+That's when it clicked: what I was missing was interactivity. Biases are behavioural, so learning them should involve behaviour too: practice, scenarios, experiments, and feedback, not just definitions floating in the void.
+
+I originally wanted Cognitive Bias Lab to be a quick exploration of that idea. Instead, it quickly got out of hand and turned into a real live product that thousands of people around the world use today.
+
+## The build: from AI magic tricks to a real product stack
+
+Quick disclaimer: this was 100% vibe-coded. Yes, I didn't write a single line of code manually. Because I can. Or more precisely, because I can't.
+
+![Early prototype of Cognitive Bias Lab](/assets/blog/one-year-building-cognitive-bias-lab/early-prototype.png)
+
+![Live website of Cognitive Bias Lab](/assets/blog/one-year-building-cognitive-bias-lab/live-website.png)
+
+When I started, I didn't want to over-engineer anything. I wanted something fast, lightweight, and good enough to test whether the idea had any life in it at all.
+
+So I began with tools like Lovable and Claude, because the speed was honestly intoxicating. I could describe what I wanted and get something back that looked suspiciously like a real product. For a while, it felt like I had unlocked a cheat code: PM brain in, interface out.
+
+That early stage was exciting. It was also slightly deceptive.
+
+Because AI makes it very easy to get to "this looks like a product," and much harder to get to "this is actually a product."
+
+Once you want authentication, user history, structured content, analytics, a chatbot, a database, and things that don't collapse if you look at them too hard, the game changes. At that point, I realised I needed something more robust and switched to Cursor.
+
+That was a turning point.
+
+Cursor felt less like prompting a machine and more like collaborating with a very fast engineer who could keep up with my messy train of thought. It didn't remove complexity, but it made the process feel much more sustainable and controlled. I could move from vague idea to working implementation without getting stuck in pure tool-chaos.
+
+Over the year, the stack evolved into a pretty standard modern setup, with a bit of PM improvisation sprinkled on top:
+
+- React for the frontend
+- Node.js for the backend
+- MongoDB Atlas for the database
+- Tailwind CSS as the design system, because I enjoy consistency and fear raw CSS
+- GA4 + Google Search Console via GTM for analytics and SEO tracking
+- Google Auth + GitHub Auth for sign-in
+- Gemini API for the AI chatbot and role-play scenarios
+- Render for hosting, connected through GitHub for simple CI/CD
+- Namecheap + PrivateEmail for domain and email
+- Buy Me a Coffee as a monetisation attempt (to be fair just because I wanted to play around with it).
+
+![Tech stack overview](/assets/blog/one-year-building-cognitive-bias-lab/tech-stack.png)
+
+What this phase really taught me is that AI changed the economics of building, but not the fundamentals of product building.
+
+It became much easier to make something. It did not become easier to decide what to make, why people would care, how the system should hold together, or where the actual bottlenecks would appear.
+
+## The real challenge: not building the product, but getting anyone to find it
+
+Here's the part nobody really tells you when you build something on the internet:
+
+Publishing a website does not mean people will show up.
+
+At the beginning, Cognitive Bias Lab was basically a nice-looking empty museum. I had content, interactive elements, a decent UI, and the private conviction that this was useful.
+
+Then I'd open analytics and see numbers so small, it felt like all of this was just a toy for myself to play around with and not an actual product.
+
+And thus came the biggest challenge of the year: search appearance.
+
+![Active users by country](/assets/blog/one-year-building-cognitive-bias-lab/active-users-by-country.png)
+
+### SEO in 2025/2026 felt like a game with no rules
+
+The project started at a moment when the whole search ecosystem was already shifting because of ChatGPT and other LLMs. But the hardest part wasn't just "people search differently now."
+
+It was that Google itself changed what search even is.
+
+With AI-generated summaries appearing directly in search results, more users get what they need without ever clicking through to a site. For an educational project, that is… suboptimal, to put it politely.
+
+A lot of learning-related searches are now answered right on the results page. So you can have impressions, rankings, and the vague illusion of momentum, while clicks stay stubbornly unimpressed.
+
+That made SEO feel strange in a new way. It wasn't just a technical challenge anymore. It was the feeling of building on moving ground.
+
+### The technical issue that nearly ended me: pre-rendering
+
+![GitHub contributions in 2025](/assets/blog/one-year-building-cognitive-bias-lab/github-contributions.png)
+
+![Node.js and Puppeteer for pre-rendering](/assets/blog/one-year-building-cognitive-bias-lab/prerendering.png)
+
+Cognitive Bias Lab is a React app, which is great for interactivity. It is less great when search crawlers don't consistently see the same thing your users see. For humans, pages loaded beautifully. For crawlers, some pages could appear empty, incomplete, or just not representative of the real content.
+
+Fixing that forced me into a much deeper technical rabbit hole than I ever planned to enter. I had to learn how crawlers interpret pages, what rendering strategies work, what makes content reliably indexable, and how not to accidentally build pages that only exist after the JavaScript wakes up.
+
+There were moments when I nearly gave up.
+
+Not because I stopped believing in the project, but because SEO debugging is a special kind of torture. You make a change, wait, see nothing, make another change, break something else, wait again, question your life choices, repeat.
+
+It's less "growth lever" and more "medieval trial."
+
+### What I think actually worked
+
+After one year, Cognitive Bias Lab reached around ~1.7M impressions and ~7k organic clicks. Given how much harder educational SEO has become, especially in a world of AI-generated answers, I'm genuinely happy it got there. Although, the CTR has a lot of room for improvement.
+
+![Google Search Console metrics — 6.97K clicks, 1.68M impressions](/assets/blog/one-year-building-cognitive-bias-lab/search-console-metrics.png)
+
+Looking back, a few things seemed to make the biggest difference:
+
+**Rich snippets + technical SEO foundations** — Adding structured data like FAQ and Breadcrumbs, plus getting the technical basics right, improved how pages were understood and displayed.
+
+**Interlinking + linking to reputable sources** — Connecting pages properly, bias → examples → quiz → related bias, helped both users and crawlers. Linking to strong sources also made the project feel more credible and grounded.
+
+**Backlinks** — This was slow, but real. Educational repositories, OER platforms, forums, relevant communities. The compounding effect was small at first and meaningful later. It was also far outside of my comfort zone when I started.
+
+**SERP appearance optimisation** — Clear titles, better descriptions, cleaner breadcrumb structure. Small improvements, but important ones.
+
+### The metrics rollercoaster
+
+The metrics fluctuated a lot throughout the year. Progress, then a drop, then progress again, then some fresh nonsense from the internet gods.
+
+What surprised me most was that a huge share of performance came from one page with relatively low impressions but very high intent. It was the quiz page, and honestly, that makes perfect sense. Quiz pages are actionable. People want interaction, feedback, a result, a tiny hit of dopamine, and maybe the comfort of being told their brain is weird but in a scientifically interesting way. They also see a value in sharing it with others which helped a lot.
+
+Once I optimised that page properly and it started ranking well, it became a real traffic driver.
+
+That felt like a tiny personal win, not just because it performed, but because it validated the original product instinct: interactivity wasn't just good pedagogy, it was also the thing people actually wanted.
+
+## The best part of the year: building with the community
+
+One of the most energising things I discovered was how much better the project became once I stopped building only for the version of myself inside my own head.
+
+I shared Cognitive Bias Lab and collected feedback from:
+
+- Reddit
+- LessWrong
+- communities like Lenny's Newsletter Slack
+- and, naturally, by annoying my friends
+
+This was probably the most "real PM" part of the whole journey.
+
+Not feature shipping. Not tool experimentation. Just talking to people, watching what resonated, hearing where they got confused, seeing what felt fun, what felt too heavy, and what made them think, "Okay, this is actually useful."
+
+Some people even offered help: translations, development collaboration, suggestions for academic articles, and generally the kind of generosity you don't expect from strangers on the internet.
+
+I also tried to find academic partners. I reached out on LinkedIn, posted in relevant communities, and attempted my best serious-builder outreach.
+
+That didn't really work out, at least not yet. In hindsight, it makes sense. Academia is busy, slow, and selective, and I was basically a random Product Manager from the internet asking people to care about my strange little bias playground during a period of uncertainty and funding cuts.
+
+Still, one moment really stayed with me.
+
+At some point, I got a request from a real US-based company asking if I could do a consultancy webinar for their C-level team. An actual request. From an actual company. I checked. That was surreal.
+
+Because up to that point, the project often felt like something I was building in a quiet corner of the internet. Suddenly, it had crossed some invisible line into "people trust this enough to use it in a professional context."
+
+That was probably the first moment when the project stopped feeling like just a pet project and started feeling like a real asset.
+
+## What I'd do differently if I started again
+
+Looking back, there are a few things I'd absolutely change.
+
+### Define the goal first, then choose the stack
+
+I started in a "just build" mindset, which was useful for momentum, but expensive later.
+
+I underestimated how much technical choices would shape everything that came after. I spent too much time duct-taping rendering solutions onto a setup that wasn't ideal for the kind of discoverability I needed.
+
+One lesson here is especially relevant now that AI tools make it so easy to start building: **speed can hide architecture debt.**
+
+When everything feels possible, it becomes even more important to ask boring questions early. What actually matters here: SEO? speed? dynamic content? maintainability? cost? scale? You can absolutely use LLMs to think through stack trade-offs before starting, not because it will magically know the perfect answer, but because it helps force clarity before you commit.
+
+### Build backlinks early
+
+I focused heavily on technical SEO first, which made sense, but backlinks take time to compound.
+
+If I started again, I'd do this much earlier and in parallel:
+
+- publish useful resources fast
+- share them in relevant communities
+- collect links from repositories, OERs, and forums
+
+Not in a spammy "growth hack" way. Just in a "make things worth linking to, then actually let people know they exist" way.
+
+### Make the homepage explanation painfully clear
+
+I still find this hard:
+
+*What exactly is Cognitive Bias Lab in one sentence?*
+
+It's interactive learning. It's a practice tool. It's an educational website. It's a bit of all three.
+
+But getting that message across instantly is much harder than it sounds. I improved it over time, but I'd prioritise that much earlier if I were starting over.
+
+Because when you build something unusual, clarity is essential.
+
+### Build in public more consistently
+
+Building alone is hard. Motivation leaks.
+
+Building in public creates feedback loops: encouragement, critique, useful ideas, accountability, and the underrated emotional benefit of knowing someone else can see the thing you're trying to make.
+
+I think I would have stayed more motivated if I'd shared progress more consistently, even when it felt unfinished.
+
+## How much did it cost?
+
+This is always one of my favourite parts of other people's maker stories, so here are my real numbers.
+
+The surprising thing is that building a "real" product didn't cost thousands. It wasn't free, but it was manageable, especially relative to how much I learned (think of courses/workshops prices).
+
+![Cost breakdown — 482 euro for a year](/assets/blog/one-year-building-cognitive-bias-lab/cost-breakdown.png)
+
+### Hosting + domain + email
+
+- Hosting on Render: €6.50/month × 12 months → ~€78/year
+- PrivateEmail: €13/year
+- Domain from Namecheap: €16/year
+
+So just keeping the project alive on the internet costs around **~€107/year**.
+
+That is less than some people spend maintaining three forgotten streaming subscriptions, so not too bad.
+
+### SEO tool
+
+During the SEO crisis, I tested tools to understand what was happening:
+
+- Ubersuggest: €29/month × 2 months → €58
+
+I didn't keep it long-term, mostly because the most powerful SEO tool still appears to be a cursed combination of time, testing, and Search Console.
+
+### Dev tools and subscriptions
+
+This is where most of the spending went, and honestly, it was worth it:
+
+- 12 months of Cursor + Lovable + other tools through a Lenny's Newsletter offer: €185
+
+That bundle was excellent value, I do not think there was a better offer on the market given how much value I got from it! I practically lived in Cursor for some time and Perplexity/Lovable really helped me with research and prototyping.
+
+### ChatGPT / Claude
+
+I used ChatGPT / Claude on and off for research, debugging, writing, and thinking:
+
+- ChatGPT Premium: ~€22/month × ~6 months → ~€132
+
+This wasn't only for Cognitive Bias Lab, but it definitely helped a lot during the build.
+
+### Total
+
+So roughly:
+
+- Hosting + email + domain: ~€107
+- Ubersuggest: €58
+- Cursor/Lovable/tools: €185
+- ChatGPT Premium: ~€132
+- Gemini API ~€0 (with free credits and a cheap model)
+
+**Total: ~€482 for the year**
+
+So around €40/month on average.
+
+This does not include essentials like coffee and "I deserve a little-treat" spendings, otherwise this figure could have easily been twice as big.
+
+As a learning experience, portfolio project, playground for product ideas, and proof that I can build something real in an AI-native way, this paid for itself many times over.
+
+Honestly, I got more from this than from many courses that cost much more.
+
+## Final thoughts: why I'm still building it
+
+![A message from a stranger: "Stumbled upon your tool looking for cognitive bias resources. Bookmarked. Nicely done"](/assets/blog/one-year-building-cognitive-bias-lab/cool-message.png)
+
+Building Cognitive Bias Lab has been one of the most rewarding side projects I've done.
+
+Not because it was smooth. Definitely not because it was efficient. And not because it turned into instant traction or a monetisation success.
+
+It was rewarding because it taught me a lot about learning, distribution, product thinking, technical trade-offs, and the strange new reality of building with AI as a non-engineer PM.
+
+AI lowered the barrier to entry so much that I could finally build the thing instead of just thinking about it. But it also made one thing very clear: shipping something is not the same as making it work.
+
+You still need judgment. Taste. Persistence. Positioning. Feedback. Distribution. A willingness to keep going when the graph looks embarrassing and the crawler refuses to cooperate.
+
+So yes, one year later, the lab is still open. And I'm still experimenting!

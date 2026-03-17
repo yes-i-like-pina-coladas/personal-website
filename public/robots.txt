@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vloginov.com/sitemap.xml
+Sitemap: https://www.vladimir-loginov.com/sitemap.xml
