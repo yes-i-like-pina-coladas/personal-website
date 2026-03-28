@@ -1,11 +1,10 @@
-import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import careerData from "@/data/career.json";
 import projectsData from "@/data/projects.json";
 import organizationsData from "@/data/organizations.json";
 import skillsData from "@/data/skills.json";
-import { LinkedinIcon, FileText, ArrowRight, BookOpen, HeartHandshake, TrendingUp, Scale, ChevronDown, Target, Zap, BarChart2, Wrench, Bot } from "lucide-react";
+import { LinkedinIcon, FileText, ArrowRight, BookOpen, HeartHandshake, TrendingUp, Scale, ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -413,13 +412,13 @@ export default function Home() {
                 return 'text-xs px-2.5 py-1 font-medium';
               };
 
-              const allSkills = Object.entries(skillsData).flatMap(([cat, skills]) =>
-                (skills as string[]).map(skill => ({ skill, cat }))
+              const allSkills = Object.entries(skillsData).flatMap(([, skills]) =>
+                (skills as string[]).map(skill => ({ skill }))
               );
 
               return (
                 <div className="flex flex-wrap gap-3 sm:gap-4 justify-center items-center">
-                  {allSkills.map(({ skill, cat }, i) => {
+                  {allSkills.map(({ skill }, i) => {
                     const meta = skillMeta[skill] ?? { weight: 1, orgs: [] };
                     const isActive = activeTooltip === skill;
                     return (
