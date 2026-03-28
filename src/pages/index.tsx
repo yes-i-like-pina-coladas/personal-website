@@ -370,8 +370,8 @@ export default function Home() {
                 'Conversion Rate Optimisation': { weight: 5, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
                 'Product Strategy':        { weight: 4, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
                 'Product Discovery':       { weight: 4, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
-                'Stakeholder Management':  { weight: 4, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
-                'Roadmapping':             { weight: 3, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
+                'Stakeholder Management':  { weight: 4, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)', 'BEST Moscow (VP)'] },
+                'Roadmapping':             { weight: 3, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)', 'BEST Moscow (VP)'] },
                 'OKRs & KPIs':             { weight: 3, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
                 'User Research':           { weight: 3, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
                 'Scrum':                   { weight: 3, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
@@ -396,7 +396,7 @@ export default function Home() {
                 'Figma':                   { weight: 3, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
                 'Confluence':              { weight: 2, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
                 'Miro':                    { weight: 2, orgs: ['Yandex (Kinopoisk)', 'Trinity College Dublin'] },
-                'Notion':                  { weight: 2, orgs: ['Cognitive Bias Lab', 'Personal projects'] },
+                'Notion':                  { weight: 2, orgs: ['Cognitive Bias Lab', 'BEST Moscow (VP)', 'Personal projects'] },
                 // AI
                 'Claude Code':             { weight: 4, orgs: ['Cognitive Bias Lab', 'Commute Check', 'Personal projects'] },
                 'Cursor':                  { weight: 3, orgs: ['Cognitive Bias Lab', 'Personal projects'] },
@@ -434,9 +434,9 @@ export default function Home() {
                           onMouseEnter={() => setActiveTooltip(skill)}
                           onMouseLeave={() => setActiveTooltip(null)}
                           className={`${sizeClass(meta.weight)} rounded-full border transition-colors duration-200 ${
-                            cat === 'AI'
-                              ? 'bg-orange-50 border-orange-300 text-orange-700 hover:bg-orange-100 hover:border-orange-500'
-                              : 'bg-white border-stone-200 text-stone-600 hover:border-orange-400 hover:text-stone-900 hover:bg-orange-50'
+                            isActive
+                              ? 'border-stone-300 text-stone-900 bg-white'
+                              : 'border-transparent text-stone-600 hover:border-stone-300 hover:text-stone-900'
                           }`}
                         >
                           {skill}
