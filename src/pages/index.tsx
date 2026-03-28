@@ -435,8 +435,8 @@ export default function Home() {
                           onMouseLeave={() => setActiveTooltip(null)}
                           className={`${sizeClass(meta.weight)} rounded-full transition-all duration-200 ${
                             isActive
-                              ? 'ring-1 ring-stone-300 text-stone-900'
-                              : 'text-stone-600 hover:ring-1 hover:ring-stone-300 hover:text-stone-900'
+                              ? 'ring-1 ring-orange-300 text-orange-600'
+                              : 'text-stone-600 hover:ring-1 hover:ring-orange-300 hover:text-orange-600'
                           }`}
                         >
                           {skill}
@@ -448,12 +448,13 @@ export default function Home() {
                               animate={{ opacity: 1, y: 0, scale: 1 }}
                               exit={{ opacity: 0, y: 6, scale: 0.95 }}
                               transition={{ duration: 0.15 }}
-                              className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 pointer-events-none"
+                              className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 pointer-events-none w-max"
+                              style={{ maxWidth: 'min(180px, calc(100vw - 2rem))' }}
                             >
-                              <div className="bg-stone-900 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-lg">
+                              <div className="bg-stone-900 text-white text-xs rounded-lg px-3 py-2 shadow-lg text-center">
                                 <p className="text-stone-400 text-[10px] uppercase tracking-wide mb-1 font-medium">Used / learned at</p>
                                 {meta.orgs.map(org => (
-                                  <p key={org} className="leading-snug">{org}</p>
+                                  <p key={org} className="leading-snug whitespace-normal">{org}</p>
                                 ))}
                                 <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-stone-900" />
                               </div>
