@@ -5,9 +5,9 @@ import { motion } from 'framer-motion';
 
 const navItems = [
   { id: 'about', label: 'About', icon: User },
-  { id: 'values', label: 'Values', icon: HeartHandshake },
   { id: 'career', label: 'Career', icon: Briefcase },
   { id: 'projects', label: 'Projects', icon: Code },
+  { id: 'values', label: 'Values', icon: HeartHandshake },
   { id: 'blog', label: 'Blog', icon: BookOpen },
 ];
 

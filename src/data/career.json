@@ -3,28 +3,50 @@
     "company": "Smartbox Group",
     "description": "Leading European provider of gift experiences",
     "logo": "/assets/smartbox_logo.png",
-    "position": "Product Owner",
-    "years": "2024–present"
+    "position": "Product Manager",
+    "years": "2024–present",
+    "bullets": [
+      "Leading conversion and payment initiatives in Europe's largest experience gift e-commerce platform.",
+      "Designed a targeted promotion system that reduced total discount percentage by ~15% through channel-based optimisation.",
+      "Translated EU Omnibus Directive into actionable pricing rules across 9 EU markets, aligning legal, UX, and engineering teams.",
+      "Organised and hosted the company's internal Product Manager Community event."
+    ]
   },
   {
     "company": "Trinity College Dublin",
-    "description": "Masters in Management",
+    "description": "MSc Business Management · First Class Honours",
     "logo": "/assets/trinity_logo.svg",
     "position": "Student",
-    "years": "2023–2024"
+    "years": "2023–2024",
+    "bullets": [
+      "Graduated with First Class Honours in MSc Business Management.",
+      "Pitched at Trinity's Dragons' Den startup competition to an audience of ~200 people."
+    ]
   },
   {
     "company": "Yandex (Kinopoisk)",
-    "description": "Russia's largest video streaming service",
+    "description": "Russia's largest video streaming service · 90M+ MAU",
     "logo": "/assets/yandex_logo.png",
-    "position": "Product Manager",
-    "years": "2021–2023"
+    "position": "Growth Product Manager → Digital Project Manager",
+    "years": "2021–2023",
+    "bullets": [
+      "Led growth initiatives focusing on subscription monetisation and conversion rate optimisation.",
+      "Built a full-cycle experimentation process, launching 100+ A/B tests and cutting hypothesis validation time by 50%.",
+      "Boosted subscription conversion rate by 30% via payment flow redesign.",
+      "Implemented NPS collection across 6 platforms from metrics design to dashboard creation.",
+      "Designed 3 Tableau dashboards used by cross-functional teams and senior product leadership."
+    ]
   },
   {
-    "company": "BMSTU",
-    "description": "Bauman Moscow State Technical University - Applied Mathematics",
+    "company": "Bauman Moscow State TU",
+    "description": "BSc Pure Mathematics · 2:1 (4.5/5, top 15% of the course)",
     "logo": "/assets/bmstu_logo.png",
     "position": "Student",
-    "years": "2017–2021"
+    "years": "2017–2021",
+    "bullets": [
+      "Bachelor's thesis on dynamic clustering algorithms.",
+      "Elected Vice-President for HR & IT at BEST Moscow, leading 30+ members, organising 12 soft skills trainings, 2 hackathons and 3 job fairs.",
+      "Presented at 2 national conferences and published 2 academic articles."
+    ]
   }
-] 
+]

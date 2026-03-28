@@ -1,6 +1,8 @@
-import { useParams } from 'react-router-dom';
-import { loadPostBySlug } from '@/lib/content';
+import { Link, useParams } from 'react-router-dom';
+import { getPosts, loadPostBySlug } from '@/lib/content';
+import type { Post } from '@/lib/content';
 import Footer from '@/components/Footer';
+import BlogPostCard from '@/components/BlogPostCard';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 function setMetaTag(name: string, content: string) {
@@ -28,11 +30,20 @@ function setPropertyTag(property: string, content: string) {
 export default function PostPage() {
   const { slug = '' } = useParams();
   const [post, setPost] = useState<{ Component: any; frontmatter: any } | null>(null);
+  const [relatedPosts, setRelatedPosts] = useState<Post[]>([]);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     (async () => {
       const loaded = await loadPostBySlug(slug);
       setPost(loaded);
+    })();
+  }, [slug]);
+
+  useEffect(() => {
+    (async () => {
+      const all = await getPosts();
+      setRelatedPosts(all.filter(p => p.slug !== slug).slice(0, 2));
     })();
   }, [slug]);
 
@@ -50,14 +61,16 @@ export default function PostPage() {
     document.title = `${title} | Vladimir Loginov`;
     setMetaTag('description', description);
     setMetaTag('author', author);
-    setMetaTag('og:site_name', 'Vladimir Loginov');
-    setMetaTag('og:title', `${title} | Vladimir Loginov`);
-    setMetaTag('og:description', description);
-    setMetaTag('og:type', 'article');
-    setMetaTag('og:url', url);
-    if (frontmatter.image) setMetaTag('og:image', `${window.location.origin}${frontmatter.image}`);
+    setPropertyTag('og:site_name', 'Vladimir Loginov');
+    setPropertyTag('og:title', `${title} | Vladimir Loginov`);
+    setPropertyTag('og:description', description);
+    setPropertyTag('og:type', 'article');
+    setPropertyTag('og:url', url);
+    setPropertyTag('og:locale', 'en_IE');
+    if (frontmatter.image) setPropertyTag('og:image', `${window.location.origin}${frontmatter.image}`);
     if (published) setPropertyTag('article:published_time', published);
-    setPropertyTag('article:author', author);
+    setPropertyTag('article:author', 'https://www.linkedin.com/in/loginov-vladimir/');
+    tags.forEach(tag => setPropertyTag('article:tag', tag));
     setMetaTag('twitter:card', 'summary_large_image');
     setMetaTag('twitter:title', `${title} | Vladimir Loginov`);
     setMetaTag('twitter:description', description);
@@ -76,19 +89,24 @@ export default function PostPage() {
     const ld = {
       '@context': 'https://schema.org',
       '@type': 'BlogPosting',
+      mainEntityOfPage: { '@type': 'WebPage', '@id': url },
       headline: title,
       datePublished: published,
       dateModified: published,
       description,
       url,
+      image: frontmatter.image ? `${window.location.origin}${frontmatter.image}` : `${window.location.origin}/assets/photo_normal.jpg`,
       author: {
         '@type': 'Person',
         name: author,
+        url: 'https://www.vladimir-loginov.com',
+        sameAs: 'https://www.linkedin.com/in/loginov-vladimir/',
       },
       keywords: tags.join(', '),
       publisher: {
         '@type': 'Person',
         name: 'Vladimir Loginov',
+        url: 'https://www.vladimir-loginov.com',
       },
     };
     let script = document.getElementById('post-jsonld') as HTMLScriptElement | null;
@@ -142,6 +160,14 @@ export default function PostPage() {
   const [readProgress, setReadProgress] = useState(0);
 
   const closeLightbox = useCallback(() => setLightboxSrc(null), []);
+
+  const handleShare = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch { /* ignore */ }
+  }, []);
 
   useEffect(() => {
     if (!lightboxSrc) return;
@@ -281,6 +307,9 @@ export default function PostPage() {
           </nav>
         </aside>
         <div>
+          <Link to="/blog" className="inline-flex items-center gap-1.5 text-sm text-stone-500 hover:text-orange-500 transition-colors mb-6">
+            <span>←</span> Back to Blog
+          </Link>
           <h1 className="text-4xl font-bold mb-2 text-stone-900">{frontmatter.title}</h1>
           {frontmatter.subtitle && (
             <p className="text-lg text-stone-600 mb-1">{frontmatter.subtitle}</p>
@@ -288,12 +317,28 @@ export default function PostPage() {
           {frontmatter.subtitleNote && (
             <p className="text-sm text-stone-500 italic mb-4">{frontmatter.subtitleNote}</p>
           )}
-          <div className="text-sm text-stone-500 mb-8">
-            {(frontmatter.author as string) || 'Vladimir Loginov'} · {new Date(frontmatter.date || Date.now()).toLocaleDateString('en-GB')} {readingTimeMinutes ? `· ${readingTimeMinutes} min read` : ''} {frontmatter.tags?.length ? `· ${frontmatter.tags.join(', ')}` : ''}
+          <div className="flex items-center justify-between gap-4 mb-8 flex-wrap">
+            <div className="text-sm text-stone-500">
+              {(frontmatter.author as string) || 'Vladimir Loginov'} · {new Date(frontmatter.date || Date.now()).toLocaleDateString('en-GB')} {readingTimeMinutes ? `· ${readingTimeMinutes} min read` : ''} {frontmatter.tags?.length ? `· ${frontmatter.tags.join(', ')}` : ''}
+            </div>
+            <button
+              onClick={handleShare}
+              className="flex items-center gap-1.5 text-sm text-stone-500 hover:text-orange-500 transition-colors border border-stone-200 rounded-full px-3 py-1"
+            >
+              {copied ? '✓ Copied!' : '⎘ Copy link'}
+            </button>
           </div>
           <div ref={contentRef} className="max-w-3xl post-content">
             <Component components={components} />
           </div>
+          {relatedPosts.length > 0 && (
+            <div className="mt-16 pt-10 border-t border-stone-200 max-w-3xl">
+              <h2 className="text-xl font-bold text-stone-900 mb-6">More posts</h2>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {relatedPosts.map(p => <BlogPostCard key={p.slug} post={p} />)}
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <Footer />
