@@ -375,34 +375,34 @@ export default function Home() {
                 'OKRs & KPIs':             { weight: 3, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
                 'User Research':           { weight: 3, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
                 'Scrum':                   { weight: 3, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
-                'Kanban':                  { weight: 2, orgs: ['Yandex (Kinopoisk)'] },
+                'Kanban':                  { weight: 2, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
                 'Product Led Growth':      { weight: 3, orgs: ['Yandex (Kinopoisk)', 'Cognitive Bias Lab'] },
                 // Specialisation
                 'Payments':                { weight: 5, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
                 'Monetisation':            { weight: 4, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
-                'Growth':                  { weight: 4, orgs: ['Yandex (Kinopoisk)', 'Cognitive Bias Lab'] },
+                'Growth':                  { weight: 4, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group', 'Cognitive Bias Lab'] },
                 'E-Commerce':              { weight: 3, orgs: ['Smartbox Group'] },
-                'NPS':                     { weight: 3, orgs: ['Yandex (Kinopoisk)'] },
+                'NPS':                     { weight: 3, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
                 // Data & Analytics
                 'SQL':                     { weight: 4, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
-                'Amplitude':               { weight: 4, orgs: ['Smartbox Group'] },
+                'Amplitude':               { weight: 3, orgs: ['Personal projects'] },
                 'Tableau':                 { weight: 3, orgs: ['Yandex (Kinopoisk)'] },
                 'Google Analytics':        { weight: 3, orgs: ['Cognitive Bias Lab', 'Smartbox Group'] },
-                'Data Visualization':      { weight: 3, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
-                'Statistics':              { weight: 3, orgs: ['Bauman Moscow State TU', 'Yandex (Kinopoisk)'] },
+                'Data Visualization':      { weight: 3, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group', 'Novaya Gazeta'] },
+                'Statistics':              { weight: 3, orgs: ['Bauman Moscow State TU', 'Yandex (Kinopoisk)', 'Novaya Gazeta'] },
                 'Power BI':                { weight: 2, orgs: ['Smartbox Group'] },
                 // Tools
-                'Jira':                    { weight: 3, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
+                'Jira':                    { weight: 3, orgs: ['Smartbox Group'] },
                 'Figma':                   { weight: 3, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
-                'Confluence':              { weight: 2, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
-                'Miro':                    { weight: 2, orgs: ['Yandex (Kinopoisk)', 'Trinity College Dublin'] },
+                'Confluence':              { weight: 2, orgs: ['Smartbox Group'] },
+                'Miro':                    { weight: 2, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group', 'Trinity College Dublin'] },
                 'Notion':                  { weight: 2, orgs: ['Cognitive Bias Lab', 'BEST Moscow (VP)', 'Personal projects'] },
                 // AI
                 'Claude Code':             { weight: 4, orgs: ['Cognitive Bias Lab', 'Commute Check', 'Personal projects'] },
                 'Cursor':                  { weight: 3, orgs: ['Cognitive Bias Lab', 'Personal projects'] },
                 'Prompt Engineering':      { weight: 3, orgs: ['Improve at Chess with AI', 'Cognitive Bias Lab'] },
                 'ChatGPT':                 { weight: 3, orgs: ['Improve at Chess with AI', 'Personal projects'] },
-                'Cowork':                  { weight: 2, orgs: ['Personal projects'] },
+                'Claude Cowork':           { weight: 2, orgs: ['Personal projects'] },
               };
 
               const sizeClass = (w: number) => {
@@ -433,10 +433,10 @@ export default function Home() {
                           onClick={() => setActiveTooltip(isActive ? null : skill)}
                           onMouseEnter={() => setActiveTooltip(skill)}
                           onMouseLeave={() => setActiveTooltip(null)}
-                          className={`${sizeClass(meta.weight)} rounded-full border transition-colors duration-200 ${
+                          className={`${sizeClass(meta.weight)} rounded-full transition-all duration-200 ${
                             isActive
-                              ? 'border-stone-300 text-stone-900 bg-white'
-                              : 'border-transparent text-stone-600 hover:border-stone-300 hover:text-stone-900'
+                              ? 'ring-1 ring-stone-300 text-stone-900'
+                              : 'text-stone-600 hover:ring-1 hover:ring-stone-300 hover:text-stone-900'
                           }`}
                         >
                           {skill}
