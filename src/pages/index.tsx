@@ -368,7 +368,7 @@ export default function Home() {
                 // Product
                 'A/B Testing':             { weight: 5, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
                 'Conversion Rate Optimisation': { weight: 5, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
-                'Product Strategy':        { weight: 4, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
+                'Product Strategy':        { weight: 4, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)', 'Cognitive Bias Lab'] },
                 'Product Discovery':       { weight: 4, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
                 'Stakeholder Management':  { weight: 4, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)', 'BEST Moscow (VP)'] },
                 'Roadmapping':             { weight: 3, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)', 'BEST Moscow (VP)'] },
@@ -388,8 +388,8 @@ export default function Home() {
                 'Amplitude':               { weight: 3, orgs: ['Personal projects'] },
                 'Tableau':                 { weight: 3, orgs: ['Yandex (Kinopoisk)'] },
                 'Google Analytics':        { weight: 3, orgs: ['Cognitive Bias Lab', 'Smartbox Group'] },
-                'Data Visualization':      { weight: 3, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group', 'Novaya Gazeta'] },
-                'Statistics':              { weight: 3, orgs: ['Bauman Moscow State TU', 'Yandex (Kinopoisk)', 'Novaya Gazeta'] },
+                'Data Visualization':      { weight: 3, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group', 'Novaya Gazeta Europe'] },
+                'Statistics':              { weight: 3, orgs: ['Bauman Moscow State TU', 'Yandex (Kinopoisk)', 'Novaya Gazeta Europe'] },
                 'Power BI':                { weight: 2, orgs: ['Smartbox Group'] },
                 // Tools
                 'Jira':                    { weight: 3, orgs: ['Smartbox Group'] },
