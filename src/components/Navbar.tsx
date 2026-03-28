@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { User, Briefcase, Code, BookOpen, HeartHandshake } from 'lucide-react';
+import { User, Briefcase, Code, BookOpen, HeartHandshake, Layers } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const navItems = [
   { id: 'about', label: 'About', icon: User },
   { id: 'career', label: 'Career', icon: Briefcase },
+  { id: 'skills', label: 'Skills', icon: Layers },
   { id: 'projects', label: 'Projects', icon: Code },
   { id: 'values', label: 'Values', icon: HeartHandshake },
   { id: 'blog', label: 'Blog', icon: BookOpen },

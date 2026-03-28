@@ -1,10 +1,11 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import careerData from "@/data/career.json";
 import projectsData from "@/data/projects.json";
 import organizationsData from "@/data/organizations.json";
-// import skillsData from "@/data/skills.json";
-import { LinkedinIcon, FileText, ArrowRight, BookOpen, HeartHandshake, TrendingUp, Scale, ChevronDown } from "lucide-react";
+import skillsData from "@/data/skills.json";
+import { LinkedinIcon, FileText, ArrowRight, BookOpen, HeartHandshake, TrendingUp, Scale, ChevronDown, Target, Zap, BarChart2, Wrench, Bot } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -22,6 +23,7 @@ export default function Home() {
   const [activeCareerItem, setActiveCareerItem] = useState<string | null>(null);
   const [expandedCareerItems, setExpandedCareerItems] = useState<Set<string>>(new Set());
   const [recentPosts, setRecentPosts] = useState<Post[]>([]);
+  const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
 
   const toggleCareerItem = (id: string) => {
     setExpandedCareerItems(prev => {
@@ -83,7 +85,7 @@ export default function Home() {
   // SEO: home page defaults
   useEffect(() => {
     document.title = 'Vladimir Loginov – Product Manager | Dublin';
-    const description = 'Product Manager specialising in payments, conversion optimisation, and A/B testing. 3+ years growing B2C products at Yandex (Kinopoisk) and Smartbox. MSc Trinity College Dublin. Based in Dublin, Ireland.';
+    const description = 'Product Manager specialising in payments, conversion optimisation, and A/B testing. 4+ years growing B2C products at Yandex (Kinopoisk) and Smartbox. MSc Trinity College Dublin. Based in Dublin, Ireland.';
     let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
     if (!meta) {
       meta = document.createElement('meta');
@@ -203,7 +205,7 @@ export default function Home() {
                   Accelerating product growth through data, experimentation, and insight.
                   </p>
                   <p className="relative text-sm sm:text-base text-stone-500 max-w-[580px] mx-auto lg:mx-0 z-10 leading-relaxed border-l-2 border-orange-400 pl-4">
-                    3+ years building B2C products at scale — subscription monetisation and payment CRO at Yandex&apos;s Kinopoisk (90M+ MAU), now driving conversion growth at Europe&apos;s largest gift experience marketplace. MSc Business Management from Trinity College Dublin. Based in Dublin, Ireland.
+                    4+ years building B2C products at scale — subscription monetisation and payment CRO at Yandex&apos;s Kinopoisk (90M+ MAU), now driving conversion growth at Europe&apos;s largest gift experience marketplace. MSc Business Management from Trinity College Dublin. Based in Dublin, Ireland.
                   </p>
                 </div>
                 <div className="relative flex flex-col sm:flex-row gap-4 justify-center lg:justify-start z-10 w-full sm:w-auto">
@@ -355,38 +357,117 @@ export default function Home() {
             
           </div>
         </section>
-        {/* Skills section hidden for now
-        <section className="w-full py-8 sm:py-12 md:py-20 lg:py-28">
+        <section id="skills" className="w-full py-8 sm:py-12 md:py-20 lg:py-28 scroll-mt-28">
           <div className="container px-8 sm:px-12 md:px-16 lg:px-24 max-w-[1400px] mx-auto">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-stone-900 mb-6 sm:mb-8 lg:mb-12">
               Skills & Tools
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-              {Object.entries(skillsData).map(([category, skills], catIndex) => (
-                <motion.div
-                  key={category}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: catIndex * 0.1 }}
-                >
-                  <h3 className="text-sm font-semibold text-orange-500 uppercase tracking-wider mb-3">{category}</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1.5 text-sm font-medium rounded-full bg-white border border-stone-200/60 text-stone-600 hover:border-orange-400 hover:text-stone-900 hover:shadow-[0_0_10px_theme(colors.orange.400/0.15)] transition-all duration-200"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            {(() => {
+              // Weight 5=core, 4=strong, 3=solid, 2=good, 1=familiar
+              const skillMeta: Record<string, { weight: number; orgs: string[] }> = {
+                // Product
+                'A/B Testing':             { weight: 5, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
+                'Conversion Rate Optimisation': { weight: 5, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
+                'Product Strategy':        { weight: 4, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
+                'Product Discovery':       { weight: 4, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
+                'Stakeholder Management':  { weight: 4, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
+                'Roadmapping':             { weight: 3, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
+                'OKRs & KPIs':             { weight: 3, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
+                'User Research':           { weight: 3, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
+                'Scrum':                   { weight: 3, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
+                'Kanban':                  { weight: 2, orgs: ['Yandex (Kinopoisk)'] },
+                'Product Led Growth':      { weight: 3, orgs: ['Yandex (Kinopoisk)', 'Cognitive Bias Lab'] },
+                // Specialisation
+                'Payments':                { weight: 5, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
+                'Monetisation':            { weight: 4, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
+                'Growth':                  { weight: 4, orgs: ['Yandex (Kinopoisk)', 'Cognitive Bias Lab'] },
+                'E-Commerce':              { weight: 3, orgs: ['Smartbox Group'] },
+                'NPS':                     { weight: 3, orgs: ['Yandex (Kinopoisk)'] },
+                // Data & Analytics
+                'SQL':                     { weight: 4, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
+                'Amplitude':               { weight: 4, orgs: ['Smartbox Group'] },
+                'Tableau':                 { weight: 3, orgs: ['Yandex (Kinopoisk)'] },
+                'Google Analytics':        { weight: 3, orgs: ['Cognitive Bias Lab', 'Smartbox Group'] },
+                'Data Visualization':      { weight: 3, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
+                'Statistics':              { weight: 3, orgs: ['Bauman Moscow State TU', 'Yandex (Kinopoisk)'] },
+                'Power BI':                { weight: 2, orgs: ['Smartbox Group'] },
+                // Tools
+                'Jira':                    { weight: 3, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
+                'Figma':                   { weight: 3, orgs: ['Yandex (Kinopoisk)', 'Smartbox Group'] },
+                'Confluence':              { weight: 2, orgs: ['Smartbox Group', 'Yandex (Kinopoisk)'] },
+                'Miro':                    { weight: 2, orgs: ['Yandex (Kinopoisk)', 'Trinity College Dublin'] },
+                'Notion':                  { weight: 2, orgs: ['Cognitive Bias Lab', 'Personal projects'] },
+                // AI
+                'Claude Code':             { weight: 4, orgs: ['Cognitive Bias Lab', 'Commute Check', 'Personal projects'] },
+                'Cursor':                  { weight: 3, orgs: ['Cognitive Bias Lab', 'Personal projects'] },
+                'Prompt Engineering':      { weight: 3, orgs: ['Improve at Chess with AI', 'Cognitive Bias Lab'] },
+                'ChatGPT':                 { weight: 3, orgs: ['Improve at Chess with AI', 'Personal projects'] },
+                'Cowork':                  { weight: 2, orgs: ['Personal projects'] },
+              };
+
+              const sizeClass = (w: number) => {
+                if (w >= 5) return 'text-2xl sm:text-3xl px-5 py-2.5 font-bold';
+                if (w === 4) return 'text-lg sm:text-xl px-4 py-2 font-semibold';
+                if (w === 3) return 'text-base px-3.5 py-1.5 font-medium';
+                if (w === 2) return 'text-sm px-3 py-1.5 font-medium';
+                return 'text-xs px-2.5 py-1 font-medium';
+              };
+
+              const allSkills = Object.entries(skillsData).flatMap(([cat, skills]) =>
+                (skills as string[]).map(skill => ({ skill, cat }))
+              );
+
+              return (
+                <div className="flex flex-wrap gap-3 sm:gap-4 justify-center items-center">
+                  {allSkills.map(({ skill, cat }, i) => {
+                    const meta = skillMeta[skill] ?? { weight: 1, orgs: [] };
+                    const isActive = activeTooltip === skill;
+                    return (
+                      <div key={skill} className="relative">
+                        <motion.button
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.3, delay: i * 0.02 }}
+                          whileHover={{ scale: 1.08, y: -2 }}
+                          onClick={() => setActiveTooltip(isActive ? null : skill)}
+                          onMouseEnter={() => setActiveTooltip(skill)}
+                          onMouseLeave={() => setActiveTooltip(null)}
+                          className={`${sizeClass(meta.weight)} rounded-full border transition-colors duration-200 ${
+                            cat === 'AI'
+                              ? 'bg-orange-50 border-orange-300 text-orange-700 hover:bg-orange-100 hover:border-orange-500'
+                              : 'bg-white border-stone-200 text-stone-600 hover:border-orange-400 hover:text-stone-900 hover:bg-orange-50'
+                          }`}
+                        >
+                          {skill}
+                        </motion.button>
+                        <AnimatePresence>
+                          {isActive && meta.orgs.length > 0 && (
+                            <motion.div
+                              initial={{ opacity: 0, y: 6, scale: 0.95 }}
+                              animate={{ opacity: 1, y: 0, scale: 1 }}
+                              exit={{ opacity: 0, y: 6, scale: 0.95 }}
+                              transition={{ duration: 0.15 }}
+                              className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 pointer-events-none"
+                            >
+                              <div className="bg-stone-900 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-lg">
+                                <p className="text-stone-400 text-[10px] uppercase tracking-wide mb-1 font-medium">Used / learned at</p>
+                                {meta.orgs.map(org => (
+                                  <p key={org} className="leading-snug">{org}</p>
+                                ))}
+                                <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-stone-900" />
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })()}
           </div>
         </section>
-        */}
         <section id="projects" className="w-full py-8 sm:py-12 md:py-24 lg:py-32 scroll-mt-28">
           <div className="container px-8 sm:px-12 md:px-16 lg:px-24 max-w-[1400px] mx-auto">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-stone-900 mb-6 sm:mb-8 lg:mb-12">
